@@ -34,7 +34,7 @@ def forecast(forecastURL):
 '''
 def create_payload(data):
     json_data = bytesToJSON(data)
-    payload = {}
+    payload = { }
     payload['forecast'] = forecast(json_data.properties.forecast)
     return jsonify(payload)
 

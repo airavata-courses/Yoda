@@ -24,7 +24,7 @@ const authRoutes = require("./routes/auth")
 //middleware
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-//app.use(expressValidator());
+app.use(expressValidator());
 app.use("/", authRoutes);
 
 

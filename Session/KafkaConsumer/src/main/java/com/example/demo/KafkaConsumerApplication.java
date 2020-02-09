@@ -51,21 +51,24 @@ public class KafkaConsumerApplication {
 		return messages;
 	}
 	
-	@GetMapping("/consumeJSONMessage")
-	public Sessiondata consumeJSONMsg() {
-		return dataFromTopic;
-	}
+	/*
+	 * @GetMapping("/consumeJSONMessage") public Sessiondata consumeJSONMsg() {
+	 * return dataFromTopic; }
+	 */
 	
-	@KafkaListener(groupId = "javaADS", topics = "sessionKafka",containerFactory ="kafkaListenerContainerFactory" )
+	@KafkaListener(groupId = "javaADS", topics = "SessionKafka1",containerFactory ="kafkaListenerContainerFactory" )
 	public List<String> getMsgFromTopic(String data) {
 		messages.add(data);
 		return messages;
 	}
 	
-	Sessiondata dataFromTopic=null;
-	@KafkaListener(groupId = "JSONjavaADS", topics = "sessionKafka",containerFactory ="jsonKafkaListenerContainerFactory" )
+	
+	
+	@KafkaListener(groupId = "JSONjavaADS", topics = "SessionKafkaJSON",containerFactory ="jsonKafkaListenerContainerFactory" )
 	public Sessiondata getJSONMsgFromTopic(Sessiondata data) {
-		dataFromTopic=data;
+		Sessiondata	dataFromTopic=data;
+		System.out.println("**********"+dataFromTopic.getSessionId()+"id-data"+dataFromTopic.getData());
+		saveSession(dataFromTopic);
 		return dataFromTopic;
 	}
 	

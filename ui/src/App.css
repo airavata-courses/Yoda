@@ -1,38 +1,33 @@
-.App {
-  text-align: center;
-}
+.bwm-form {
+  color: #484848; }
+  .bwm-form h1 {
+    font-weight: 700;
+    margin-bottom: 30px; }
+  .bwm-form .image-container {
+    position: relative; }
+    .bwm-form .image-container img {
+      width: 100%;
+      border-radius: 5px; }
+  .bwm-form label {
+    font-size: 12px; }
+  .bwm-form .form-text {
+    font-size: 13px; }
+  .bwm-form .catchphrase {
+    text-align: center;
+    font-size: 42px;
+    position: absolute;
+    color: #f1f1f1;
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 50px;
+    letter-spacing: 1px; }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+.bwm-res-errors {
+  margin: 10px 0; }
+  .bwm-res-errors p {
+    margin-bottom: 5px; }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+.page-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px; }

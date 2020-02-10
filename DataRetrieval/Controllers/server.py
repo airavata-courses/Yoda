@@ -58,7 +58,7 @@ def dataRetrieve(radar, day, month, year):
         if request.method == 'GET':
             availData = conn.get_avail_scans(year, month, day, radar)
             payload = {}
-            payload['availData'] = availData[0:4]
+            payload['availData'] = availData[0]
             pickleData = pickle.dumps(payload)
             producer.send('data-model', key=b'foo', value=pickleData)
             return 'hi'

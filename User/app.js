@@ -6,6 +6,7 @@ const morgan = require("morgan");
 const bodyParser = require('body-parser');
 var cookieParser = require("cookie-parser");
 const expressValidator = require('express-validator');
+const cors = require('cors');
 
 dotenv.config()
 
@@ -22,20 +23,15 @@ mongoose.connection.on('error', err =>{
 //bring in routes
 const authRoutes = require("./routes/auth")
 
-const allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', "http://localhost:8080/signup");
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-}
-
 //middleware
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
+app.use(cors());
 app.use("/", authRoutes);
-app.use(allowCrossDomain);
+
+
 
 
 const port = process.env.PORT || 8080;

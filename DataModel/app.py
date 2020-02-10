@@ -6,7 +6,7 @@ import nexradaws
 
 conn = nexradaws.NexradAwsInterface()
 
-from Controllers.utils import download_data
+# from Controllers.utils import download_data
 
 consumer = KafkaConsumer("data-model", auto_offset_reset='earliest', group_id='kafkagroupid', enable_auto_commit=True,
 						 bootstrap_servers=['localhost:9092'], api_version=(0, 10))

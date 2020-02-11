@@ -29,13 +29,13 @@ class Menu extends Component {
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <ul class="nav nav-pills">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Hello {userName}</a>
+        <a class="nav-link" href="">Hello {userName}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Dash Board</a>
+        <Link class = "nav-link" to={`/`}>Dash Board</Link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Activities</a>
+        <Link class = "nav-link" to={`/activities/${userId}`}> Activities </Link>
         </li>
         
         {!isAuthenticated() && (

@@ -15,6 +15,7 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 import com.example.demo.Repository.SessionRepository;
 import com.example.demo.model.Sessiondata;
+import com.example.demo.model.UpdateStatus;
 
 @Configuration
 @EnableKafka
@@ -38,19 +39,41 @@ public class KafkaConsumerConfig {
 		
 	}
 	
+	/*
+	 * @Bean public ConsumerFactory<String, Sessiondata> jsonConsumerFactory(){
+	 * Map<String, Object> configs=new HashMap<>();
+	 * configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+	 * configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG,
+	 * StringDeserializer.class);
+	 * configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,JsonDeserializer.
+	 * class); configs.put(ConsumerConfig.GROUP_ID_CONFIG, "kafkagroupid"); return
+	 * new DefaultKafkaConsumerFactory<>(configs,new StringDeserializer(),new
+	 * JsonDeserializer<>(Sessiondata.class)); }
+	 * 
+	 * @Bean public ConcurrentKafkaListenerContainerFactory<String, Sessiondata>
+	 * jsonKafkaListenerContainerFactory(){
+	 * ConcurrentKafkaListenerContainerFactory<String, Sessiondata> factory=new
+	 * ConcurrentKafkaListenerContainerFactory<String, Sessiondata>();
+	 * factory.setConsumerFactory(jsonConsumerFactory());
+	 * 
+	 * return factory;
+	 * 
+	 * }
+	 */
+	
 	@Bean
-	public ConsumerFactory<String, Sessiondata> jsonConsumerFactory(){
+	public ConsumerFactory<String, UpdateStatus> jsonUpdateConsumerFactory(){
 		Map<String, Object> configs=new HashMap<>();
 		configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
 		configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
 		configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,JsonDeserializer.class);
-		configs.put(ConsumerConfig.GROUP_ID_CONFIG, "kafkagroupid");
-		return new DefaultKafkaConsumerFactory<>(configs,new StringDeserializer(),new JsonDeserializer<>(Sessiondata.class));
+		configs.put(ConsumerConfig.GROUP_ID_CONFIG, "kafkagroupidUpdate");
+		return new DefaultKafkaConsumerFactory<>(configs,new StringDeserializer(),new JsonDeserializer<>(UpdateStatus.class));
 	}
 	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, Sessiondata> jsonKafkaListenerContainerFactory(){
-		ConcurrentKafkaListenerContainerFactory<String, Sessiondata> factory=new ConcurrentKafkaListenerContainerFactory<String, Sessiondata>();
-		factory.setConsumerFactory(jsonConsumerFactory());
+	public ConcurrentKafkaListenerContainerFactory<String, UpdateStatus> jsonUpdateKafkaListenerContainerFactory(){
+		ConcurrentKafkaListenerContainerFactory<String, UpdateStatus> factory=new ConcurrentKafkaListenerContainerFactory<String, UpdateStatus>();
+		factory.setConsumerFactory(jsonUpdateConsumerFactory());
 		
 		return factory;
 		

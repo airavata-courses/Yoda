@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.awt.Image;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -16,25 +17,24 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor	
 @ToString
-@Document(collection = "SessionData")
+@Document(collection = "ActivityLists")
 public class Sessiondata {
 	@Id
 	private int sessionId;
 	private Integer userId;
-	private Image data;
+	private String status;
+	private String createdDate;
 	
 	public Sessiondata() {
 		super();
 	}
-	/*
-	  { "Sessiondata": { "sessionId":20, "data": "plot the data"} }
-	 */
 
-	public Sessiondata(int sessionId, Integer userId, Image data) {
+	public Sessiondata(int sessionId, Integer userId, String status, String createdDate) {
 		super();
 		this.sessionId = sessionId;
 		this.userId = userId;
-		this.data = data;
+		this.status = status;
+		this.createdDate = createdDate;
 	}
 
 	public int getSessionId() {
@@ -53,16 +53,23 @@ public class Sessiondata {
 		this.userId = userId;
 	}
 
-	public Image getData() {
-		return data;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setData(Image data) {
-		this.data = data;
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
 	}
 	
-	
-	
+
 	
 	
 }

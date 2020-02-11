@@ -19,6 +19,8 @@ const MainRouter = () => (
             <Route exact path="/reset-password/:resetPasswordToken" component={ResetPassword} />
             <Route exact path="/signout" component={Signout} />
             <Route exact path="/real-time" component={RealTime} />
+            <Route exact path="/activityList" component={activityList} />
+            <Route exact path="/ActivityDetails" component={ActivityDetails} />
         </Switch>
     </div>
 );

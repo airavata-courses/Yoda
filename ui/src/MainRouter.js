@@ -6,6 +6,7 @@ import home from "./User components/home";
 import ForgotPassword from "./User components/ForgotPassword";
 import ResetPassword from "./User components/ResetPassword";
 import Signout from "./User components/Signout";
+import RealTime from "./User components/AutoPlaces";
 
 import activityList from "./Session components/activityList";
 import ActivityDetails from "./Session components/ActivityDetails";
@@ -21,6 +22,7 @@ const MainRouter = () => (
             <Route exact path="/signout" component={Signout} />
             <Route exact path="/activityList" component={activityList} />
             <Route exact path="/ActivityDetails" component={ActivityDetails} />
+            <Route exact path="/real-time" component={RealTime} />
         </Switch>
     </div>
 );

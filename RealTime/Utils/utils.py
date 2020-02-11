@@ -7,7 +7,7 @@ import json
     Function to convert bytes to json type.
 '''
 def bytesToJSON(data):
-    my_json = data.decode('utf8').replace("'", '"')
+    my_json = data.decode('utf8')
     return json.loads(my_json)
 
 '''

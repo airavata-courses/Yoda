@@ -31,7 +31,9 @@ def realTime(city, state):
             lat = location.latitude
             lon = location.longitude
             new_url = url + str(lat) + "," + str(lon)
+            print(new_url)
             data = urllib.request.urlopen(new_url).read()
+            print(data)
             payload = create_payload(data)
             return jsonify(payload)
 
@@ -42,7 +44,7 @@ def realTime(city, state):
 if __name__ == "__main__":
     app.secret_key = 'secret'
     app.debug = True
-    app.run(host='0.0.0.0', port=3400)
+    app.run(host='0.0.0.0', port=3500)
 
 
 

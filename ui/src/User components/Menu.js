@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Link  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/index";
-import { Navbar, Nav, NavDropdown} from 'react-bootstrap';
-
+import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 class Menu extends Component {
   constructor() {
@@ -19,45 +18,56 @@ class Menu extends Component {
   };
 
   render() {
-    const userId = isAuthenticated().user ? isAuthenticated().user._id : "";
-    const userName = isAuthenticated().user ? isAuthenticated().user.name : "";
-    const token = isAuthenticated().token ? isAuthenticated().token : "";
+    const userId = isAuthenticated() ? isAuthenticated().user._id : "";
+    const userName = isAuthenticated() ? isAuthenticated().user.name : "";
+    const token = isAuthenticated() ? isAuthenticated().token : "";
     // if (this.state.reloadPage) {
     //   window.location.reload();
     // }
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <ul class="nav nav-pills">
-        <li class="nav-item">
-        <a class="nav-link" href="">Hello {userName}</a>
-        </li>
-        <li class="nav-item">
-        <Link class = "nav-link" to={`/`}>Dash Board</Link>
-        </li>
-        <li class="nav-item">
-        <Link class = "nav-link" to={`/activities/${userId}`}> Activities </Link>
-        </li>
-        
-        {!isAuthenticated() && (
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <ul className="nav nav-pills">
+          <li className="nav-item">
+            <a className="nav-link" href="">
+              Hello {userName}
+            </a>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to={`/`}>
+              Dash Board
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to={`/activities/${userId}`}>
+              {" "}
+              Activities{" "}
+            </Link>
+          </li>
+
+          {!isAuthenticated() && (
             <>
-            <li class="nav-item">
-            <Link class = "nav-link" to={`/signin`}>Sign in</Link>
-            </li>
-            <li class="nav-item">
-            <Link class = "nav-link" to={`/signup`}>Sign up</Link>
-            </li>
+              <li className="nav-item">
+                <Link className="nav-link" to={`/signin`}>
+                  Sign in
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to={`/signup`}>
+                  Sign up
+                </Link>
+              </li>
             </>
-        )}
-        {isAuthenticated() && (
+          )}
+          {isAuthenticated() && (
             <div>
-                <li class="nav-item">
-                <Link class = "nav-link" to={`/signout`}>Log out</Link>
-                </li>
+              <li className="nav-item">
+                <Link className="nav-link" to={`/signout`}>
+                  Log out
+                </Link>
+              </li>
             </div>
-        )}
-        
-        
-      </ul>
+          )}
+        </ul>
       </Navbar>
     );
   }

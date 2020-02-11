@@ -8,6 +8,9 @@ import ResetPassword from "./User components/ResetPassword";
 import Signout from "./User components/Signout";
 import RealTime from "./User components/AutoPlaces";
 
+import activityList from "./Session components/activityList";
+import ActivityDetails from "./Session components/ActivityDetails";
+
 
 const MainRouter = () => (
     <div>

@@ -7,6 +7,8 @@ import ForgotPassword from "./User components/ForgotPassword";
 import ResetPassword from "./User components/ResetPassword";
 import Signout from "./User components/Signout";
 
+import activityList from "./Session components/activityList";
+import ActivityDetails from "./Session components/ActivityDetails";
 
 const MainRouter = () => (
     <div>
@@ -17,6 +19,8 @@ const MainRouter = () => (
             <Route exact path="/forgot-password" component={ForgotPassword} />
             <Route exact path="/reset-password/:resetPasswordToken" component={ResetPassword} />
             <Route exact path="/signout" component={Signout} />
+            <Route exact path="/activityList" component={activityList} />
+            <Route exact path="/ActivityDetails" component={ActivityDetails} />
         </Switch>
     </div>
 );

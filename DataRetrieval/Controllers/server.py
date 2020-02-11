@@ -10,6 +10,9 @@ from kafka import KafkaClient
 from kafka import KafkaProducer
 import pickle
 
+# Session ID Counter variable
+session_id = 10001
+
 conn = nexradaws.NexradAwsInterface()
 client = KafkaClient(hosts=['localhost:9092'])
 serve = client.topic_partitions
@@ -22,8 +25,8 @@ topics = []
 topics.append(NewTopic(name="data-model", num_partitions=1, replication_factor=1))
 topics.append(NewTopic(name="data-post", num_partitions=1, replication_factor=1))
 topics.append(NewTopic(name="data-session", num_partitions=1, replication_factor=1))
-admin = KafkaAdminClient(bootstrap_servers=['localhost:9092'], client_id='test')
-producer = KafkaProducer(bootstrap_servers=['localhost:9092'], api_version=(0, 10))
+admin = KafkaAdminClient(bootstrap_servers=['localhost:9092'])
+producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
 
 # Check if topics already exist in kafka
 flag = 0
@@ -43,6 +46,7 @@ def test():
     try:
         if request.method == 'GET':
             if not val: 
+                admin.delete_topics(topics=topics)
                 admin.create_topics(new_topics=topics, validate_only=False)
             return jsonify('Server Running succesfully on port 3500'), 200
     except Exception as e:
@@ -52,20 +56,30 @@ def test():
     Route to start the data processing pipeline.
     To retrieve data from NEXRAD.
 '''
-@app.route('/dataretrieval/<string:radar>/<int:day>/<int:month>/<int:year>', methods=['GET'])
-def dataRetrieve(radar, day, month, year):
+@app.route('/dataretrieval/<string:radar>/<int:day>/<int:month>/<int:year>/<int:user_id>', methods=['GET', 'POST'])
+def dataRetrieve(radar, day, month, year, user_id):
+    global session_id
     try:
         if request.method == 'GET':
             availData = conn.get_avail_scans(year, month, day, radar)
             payload = {}
             payload['availData'] = availData[0]
+            payload['session_id'] = session_id
+            payload['radar'] = radar
+            payload['day'] = day
+            payload['month'] = month
+            payload['year'] = year
+            payload['user_id'] = user_id
+            session_id += 1
             pickleData = pickle.dumps(payload)
             producer.send('data-model', key=b'foo', value=pickleData)
-            return 'hi'
+            response = {}
+            response['sessionId'] = session_id
+            return jsonify(response)
 
     except Exception as e:
         return jsonify(e), 500
 
 if __name__ == "__main__":
     app.secret_key = 'secret'
-    app.run(host='0.0.0.0', port=3500, debug=True)
+    app.run(host='0.0.0.0', port=3300, debug=True)

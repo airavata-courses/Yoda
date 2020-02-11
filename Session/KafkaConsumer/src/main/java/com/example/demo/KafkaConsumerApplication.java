@@ -80,8 +80,17 @@ public class KafkaConsumerApplication {
 		
 	}
 	@GetMapping("/findBySessionId/{sessionId}")
-	public Optional<SessionImage> getData(@PathVariable int sessionId){
-		return detailedRepo.findById(sessionId);
+	public List<SessionImage> getData(@PathVariable int sessionId){
+		List<SessionImage> list=detailedRepo.findAll();
+		List<SessionImage> updatedlist=new ArrayList<SessionImage>();
+		
+		for(SessionImage data: list) {
+			if(data.getSessionId()==sessionId) {
+				updatedlist.add(data);
+			}	
+		}
+		
+		return updatedlist;
 				
 	}
 	

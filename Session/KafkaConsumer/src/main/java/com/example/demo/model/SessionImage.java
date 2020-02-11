@@ -19,20 +19,20 @@ import lombok.ToString;
 @ToString
 @Document(collection = "ActivityDetail")
 public class SessionImage {
-	@Id
+
 	private int sessionId;
 	private String radar;
 	private int day;
 	private int month;
 	private int year;
 	private String image;
-	private Date createdDate;
+	private String createdDate;
 	
 	public SessionImage() {
 		super();
 	}
 
-	public SessionImage(int sessionId, String radar, int day, int month, int year, String image, Date createdDate) {
+	public SessionImage(int sessionId, String radar, int day, int month, int year, String image, String createdDate) {
 		super();
 		this.sessionId = sessionId;
 		this.radar = radar;
@@ -91,11 +91,11 @@ public class SessionImage {
 		this.image = image;
 	}
 
-	public Date getCreatedDate() {
+	public String getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
 	

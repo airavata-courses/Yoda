@@ -6,17 +6,19 @@ import home from "./User components/home";
 import ForgotPassword from "./User components/ForgotPassword";
 import ResetPassword from "./User components/ResetPassword";
 import Signout from "./User components/Signout";
+import RealTime from "./User components/AutoPlaces";
 
 
 const MainRouter = () => (
     <div>
         <Switch>
-            <Route exact path="/home" component={home} />
+            <Route exact path="/" component={home} />
             <Route exact path = "/signin" component={Signin} />
             <Route exact path = "/signup" component={Signup} />
             <Route exact path="/forgot-password" component={ForgotPassword} />
             <Route exact path="/reset-password/:resetPasswordToken" component={ResetPassword} />
             <Route exact path="/signout" component={Signout} />
+            <Route exact path="/real-time" component={RealTime} />
         </Switch>
     </div>
 );

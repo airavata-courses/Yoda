@@ -57,7 +57,7 @@ exports.forgotPassword = (req, res) => {
     if (!req.body.email)
         return res.status(400).json({ message: "No Email in request body" });
  
-    console.log("forgot password finding user with that email");
+    //console.log("forgot password finding user with that email");
     const { email } = req.body;
     console.log("signin req.body", email);
     // find the user based on email

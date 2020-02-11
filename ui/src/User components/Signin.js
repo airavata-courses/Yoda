@@ -73,7 +73,7 @@ class Signin extends Component {
         const {email, password, error, redirectToReferer, loading} = this.state;
 
         if(redirectToReferer){
-            return <Redirect to="/home" />
+            return <Redirect to="/" />
         }
 
         return(

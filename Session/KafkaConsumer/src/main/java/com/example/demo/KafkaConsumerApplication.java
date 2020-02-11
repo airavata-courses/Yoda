@@ -3,6 +3,7 @@ package com.example.demo;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
@@ -27,8 +28,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.Repository.ActivityDetailsRepository;
 import com.example.demo.Repository.SessionRepository;
+import com.example.demo.model.SessionImage;
 import com.example.demo.model.Sessiondata;
+import com.example.demo.model.UpdateStatus;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -43,19 +47,27 @@ public class KafkaConsumerApplication {
 	
 	@Autowired
 	private SessionRepository repository;
+	@Autowired
+	private ActivityDetailsRepository detailedRepo;
 	
-	@PostMapping("/addSession")
+	@PostMapping("/addActivity")
 	public String saveSession(@RequestBody Sessiondata data) {
+		System.out.println("Request received");
+		Date date=new Date();
+		data.setStatus("Executing..");
+		data.setCreatedDate(date.toString());
 		repository.save(data);
 		return "Added session with data";
 		
 	}
 	
-	@GetMapping("/findAllBooks/{userId}")
+	@GetMapping("/findAllActivities/{userId}")
 	public List<Sessiondata> getUserData(@PathVariable Integer userId){
+		System.out.println("Requested"+userId);
 		List<Sessiondata> list=new ArrayList<Sessiondata>();
 		List<Sessiondata> updatedlist=new ArrayList<Sessiondata>();
 		list=repository.findAll();
+		
 		for(Sessiondata data: list) {
 			System.out.println(data.getUserId()+"eshfghsrefvhgesvfh"+userId);
 			if(data.getUserId().equals(userId)) {
@@ -63,40 +75,44 @@ public class KafkaConsumerApplication {
 				System.out.println("sdfesd"+updatedlist);
 			}
 		}
+		
 		return updatedlist;
 		
 	}
-	@GetMapping("/findById/{sessionId}")
-	public Optional<Sessiondata> getData(@PathVariable int sessionId){
-		return repository.findById(sessionId);
+	@GetMapping("/findBySessionId/{sessionId}")
+	public Optional<SessionImage> getData(@PathVariable int sessionId){
+		return detailedRepo.findById(sessionId);
+				
 	}
 	
-	@GetMapping("/consumeStringMessage")
-	public List<String> consumeMsg(){
-		return messages;
-	}
+	/*
+	 * @GetMapping("/consumeStringMessage") public List<String> consumeMsg(){ return
+	 * messages; }
+	 */
+	
+	/*
+	 * @KafkaListener(groupId = "javaADS", topics = "SessionKafka1",containerFactory
+	 * ="kafkaListenerContainerFactory" ) public List<String> getMsgFromTopic(String
+	 * data) { messages.add(data); return messages; }
+	 */
 	
 	
-	@KafkaListener(groupId = "javaADS", topics = "SessionKafka1",containerFactory ="kafkaListenerContainerFactory" )
-	public List<String> getMsgFromTopic(String data) {
-		messages.add(data);
-		return messages;
-	}
-	
-	
-	
-	@KafkaListener(groupId = "kafkagroupid", topics = "data-session",containerFactory ="jsonKafkaListenerContainerFactory" )
-	public Sessiondata getJSONMsgFromTopic(byte[] data) throws PickleException, IOException {
-		Unpickler u = new Unpickler();
-		Integer userId=12345;
-		Object[] result = (Object[]) u.loads(data);
-		int sessionId=(int)result[0];
-		byte[] b=(byte[])result[1];
-		Object[] result1 = (Object[]) u.loads(data);
-		Image image=(Image)result[0];
+	@KafkaListener(groupId = "kafkagroupidUpdate", topics = "data-session",containerFactory ="jsonUpdateKafkaListenerContainerFactory" )
+	public UpdateStatus getJSONMsgFromTopic(UpdateStatus data){
+		Date date=new Date();
+		Sessiondata dataToAdd=new Sessiondata(data.getSessionId(),data.getUserId(),"Completed",date.toString());
+		repository.deleteById(data.getSessionId());
+		repository.save(dataToAdd);
 		
-		System.out.println(sessionId+"ewjdej"+image);
-		Sessiondata userData=new Sessiondata(sessionId, userId, image);
+		/*
+		 * Unpickler u = new Unpickler(); Integer userId=12345; Object[] result =
+		 * (Object[]) u.loads(data); int sessionId=(int)result[0]; byte[]
+		 * b=(byte[])result[1]; Object[] result1 = (Object[]) u.loads(data); Image
+		 * image=(Image)result[0];
+		 * 
+		 * System.out.println(sessionId+"ewjdej"+image); Sessiondata userData=new
+		 * Sessiondata(sessionId, userId, image);
+		 */
 		
 		/*
 		 * PyDictionary phash = (PyDictionary) cPickle.loads(data);
@@ -105,7 +121,7 @@ public class KafkaConsumerApplication {
 		 * System.out.println("**********"+dataFromTopic.getSessionId()+"id-data"+
 		 * dataFromTopic.getData()); saveSession(dataFromTopic);
 		 */
-		return null;
+		return data;
 	}
 	
 	public static void main(String[] args) {

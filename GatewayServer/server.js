@@ -1,11 +1,23 @@
 const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+
+dotenv.config();
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Welcome to Weather App");
-});
+app.use(cors());
+app.use(bodyParser.json());
 
-app.listen(8000, () => {
-  console.log("Server running in port 8000 successfully!");
+const routes = require("./routes/router");
+
+app.use("/", routes);
+
+// app.get("/", (req, res) => {
+//   res.send("Hello World");
+// });
+
+app.listen(process.env.PORT || 3100, () => {
+  console.log(`Server running in port ${process.env.PORT} successfully!`);
 });

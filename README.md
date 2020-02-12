@@ -1,4 +1,4 @@
-#Weather Forecasting System
+# Weather Forecasting System
 
 
 -  [ Collaborators. ](#Collaborators)
@@ -9,18 +9,18 @@
 
 
 <a name="Collaborators"></a>
-#Collaborators
+### Collaborators
 - Gopal Goutham
 - Shruti Desai
 - Tanvi Thote
 
 <a name="AboutApp"></a>
-#About App
+### About App
 
 Upload Image
 
 <a name="GettingStarted"></a>
-#Getting Started
+### Getting Started
 
 
 This document provides the instructions to run the application on your machine.
@@ -28,19 +28,19 @@ Clone  the project:
 >https://github.com/airavata-courses/Yoda.git
 
 <a name="Runningeachmodule"></a>
-#Running each module
+### Running each module
 
-- ###User Management
+- ####  User Management
 abc
-- ###RealTime Management
+- #### RealTime Management
 xyz
-- ###Data Retrieval Management
+- #### Data Retrieval Management
 lmn
-- ###Data Model Management
+- #### Data Model Management
 qwe
-- ###Data Post Processor Management
+- #### Data Post Processor Management
 dfg
-- ###Session Management
+- #### Session Management
 Download spring boot using the below url:
 >https://spring.io/tools3/sts/all
 

@@ -72,7 +72,7 @@ class nexrad extends Component {
         <div
           className="input-group ml-3 mt-3"
           inline
-          style={{ width: 600, justifyContent: "center" }}
+          style={{ width: 650, justifyContent: "center" }}
         >
           <select
             className="custom-select"
@@ -80,7 +80,7 @@ class nexrad extends Component {
             value={this.state.selectValue}
             onChange={this.handleRadar}
           >
-            <option selected>Choose...</option>
+            <option selected>Choose radar ID</option>
             {radars.radars &&
               radars.radars.map((radar, i) => {
                 return <option selected>{radar.radar}</option>;
@@ -90,6 +90,7 @@ class nexrad extends Component {
             {...{ placeholder: "Select date" }}
             selected={this.state.Date}
             onChange={this.handleChange}
+            maxDate={new Date()}
           />
           <div className="input-group-append">
             <button

@@ -9,9 +9,7 @@ from kafka.admin import KafkaAdminClient, NewTopic
 from kafka import KafkaClient
 from kafka import KafkaProducer
 import pickle
-
-# Session ID Counter variable
-session_id = 10001
+import uuid
 
 conn = nexradaws.NexradAwsInterface()
 client = KafkaClient(hosts=['localhost:9092'])
@@ -42,13 +40,13 @@ for t in created_topics:
     
 def test():
     try:
-        if request.method == 'GET':
-            if not val: 
-                admin.delete_topics(topics=topics)
-                admin.create_topics(new_topics=topics, validate_only=False)
-            return jsonify('Server Running succesfully on port 3500'), 200
+        if not val:
+            admin.delete_topics(topics=topics)
+            admin.create_topics(new_topics=topics, validate_only=False)
+        # return jsonify('Server Running succesfully on port 3500'), 200
     except Exception as e:
-        return jsonify(e), 500
+        # return jsonify(e), 500
+        print(e)
 
 '''
     Route to start the data processing pipeline.
@@ -56,11 +54,14 @@ def test():
 '''
 @app.route('/dataretrieval/<string:radar>/<int:day>/<int:month>/<int:year>/<string:user_id>', methods=['GET', 'POST'])
 def dataRetrieve(radar, day, month, year, user_id):
-    global session_id
-    test()
+    # test()
     try:
         if request.method == 'GET':
+            # print(int(session_id))
             availData = conn.get_avail_scans(year, month, day, radar)
+            print(availData)
+            session_id = str(uuid.uuid4())
+            print(session_id)
             payload = {}
             payload['availData'] = availData[0]
             payload['session_id'] = session_id
@@ -69,7 +70,6 @@ def dataRetrieve(radar, day, month, year, user_id):
             payload['month'] = month
             payload['year'] = year
             payload['user_id'] = user_id
-            session_id += 1
             pickleData = pickle.dumps(payload)
             producer.send('data-model', key=b'foo', value=pickleData)
             response = {}

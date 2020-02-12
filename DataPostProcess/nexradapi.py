@@ -15,9 +15,12 @@ from base64 import b64encode
 import io
 import pymongo
 import datetime
+import pyimgur
 
 mongoClient = pymongo.MongoClient("mongodb://teamyoda:teamyoda123@cluster0-shard-00-00-kooeu.mongodb.net:27017,cluster0-shard-00-01-kooeu.mongodb.net:27017,cluster0-shard-00-02-kooeu.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority")
 conn = nexradaws.NexradAwsInterface()
+CLIENT_ID = "05fab9127fc8136"
+im = pyimgur.Imgur(CLIENT_ID)
 
 def databaseSetup():
     dbList = mongoClient.list_database_names()
@@ -92,14 +95,8 @@ def payload_create(files):
         plt.tight_layout()
         # plt.show()
         plt.savefig('images/'+str(idx)+'.png')
-    imageList = []
-    images = glob.glob("images/*.png")
-    for image in images:
-        img = Image.open(image)
-        # data = np.array(img, dtype='uint8')
-        # imageList.append(data.tolist())
-        b64img = b64encode(img.tobytes()).decode('utf8')
-        imageList.append(b64img)
+        uploaded_image = im.upload_image('images/'+str(idx)+'.png', title="Uploaded with PyImgur")
+
 
     payload = {}
     payload['sessionId'] = files['session_id']
@@ -107,7 +104,7 @@ def payload_create(files):
     payload['day'] = files['day']
     payload['month'] = files['month']
     payload['year'] = files['year']
-    payload['image'] = imageList[0]
+    payload['image'] = uploaded_image.link
     payload['createdDate'] = str(datetime.datetime.utcnow())
     collection.insert_one(payload)
 

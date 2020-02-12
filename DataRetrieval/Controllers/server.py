@@ -54,7 +54,7 @@ def test():
     Route to start the data processing pipeline.
     To retrieve data from NEXRAD.
 '''
-@app.route('/dataretrieval/<string:radar>/<int:day>/<int:month>/<int:year>/<int:user_id>', methods=['GET', 'POST'])
+@app.route('/dataretrieval/<string:radar>/<int:day>/<int:month>/<int:year>/<string:user_id>', methods=['GET', 'POST'])
 def dataRetrieve(radar, day, month, year, user_id):
     global session_id
     test()

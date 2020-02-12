@@ -2,10 +2,28 @@ const dotenv = require("dotenv");
 const axios = require("axios");
 
 dotenv.config();
+const monthNames = [
+  "jan",
+  "feb",
+  "mar",
+  "apr",
+  "may",
+  "jun",
+  "jul",
+  "aug",
+  "sep",
+  "oct",
+  "nov",
+  "dec"
+];
 
 exports.dataRetrieve = async (req, res) => {
-  console.log("entered service");
-  const { day, month, year, radar, user_id } = req.body;
+  console.log("entered data retrieval service");
+  const { radar, date, user_id } = req.body;
+  const day = date["date"];
+  let mon = date["month"];
+  const month = monthNames.indexOf(mon.toLowerCase()) + 1;
+  const year = date["year"];
   // write code to retrieve day, month and year from date.
   //write code to refresh the url to get the dataretrieval service with radar, day, month and year.
   url = process.env.DATA_RETRIEVE_URL;

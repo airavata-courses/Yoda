@@ -21,9 +21,9 @@ import lombok.ToString;
 public class UpdateStatus {
 	@Id
 	private int sessionId;
-	private int userId;
+	private String userId;
 	
-	public UpdateStatus(int sessionId, int userId) {
+	public UpdateStatus(int sessionId, String userId) {
 		super();
 		this.sessionId = sessionId;
 		this.userId = userId;
@@ -37,10 +37,10 @@ public class UpdateStatus {
 	public void setSessionId(int sessionId) {
 		this.sessionId = sessionId;
 	}
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	

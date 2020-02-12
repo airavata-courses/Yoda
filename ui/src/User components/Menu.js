@@ -37,12 +37,15 @@ class Menu extends Component {
               Dash Board
             </Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link" to={`/activities/${userId}`}>
-              {" "}
-              Activities{" "}
-            </Link>
-          </li>
+
+          {isAuthenticated() && (
+            <li className="nav-item">
+              <Link className="nav-link" to={`/activities`}>
+                {" "}
+                Activities{" "}
+              </Link>
+            </li>
+          )}
 
           {!isAuthenticated() && (
             <>

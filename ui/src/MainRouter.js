@@ -9,7 +9,7 @@ import Signout from "./User components/Signout";
 import RealTime from "./User components/AutoPlaces";
 import nexrad from "./User components/nxrad";
 
-import activityList from "./Session components/activityList";
+import Activities from "./Session components/activityList";
 import ActivityDetails from "./Session components/ActivityDetails";
 
 const MainRouter = () => (
@@ -25,8 +25,12 @@ const MainRouter = () => (
         component={ResetPassword}
       />
       <Route exact path="/signout" component={Signout} />
-      <Route exact path="/activityList" component={activityList} />
-      <Route exact path="/ActivityDetails" component={ActivityDetails} />
+      <Route exact path="/activities" component={Activities} />
+      <Route
+        exact
+        path="/ActivityDetails/:session_id"
+        component={ActivityDetails}
+      />
       <Route exact path="/real-time" component={RealTime} />
       <Route exact path="/nexrad-data" component={nexrad} />
     </Switch>

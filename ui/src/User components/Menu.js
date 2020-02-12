@@ -28,7 +28,7 @@ class Menu extends Component {
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <ul className="nav nav-pills">
           <li className="nav-item">
-            <a className="nav-link" href="">
+            <a className="nav-link" >
               Hello {userName}
             </a>
           </li>

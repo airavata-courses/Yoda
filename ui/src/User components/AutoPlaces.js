@@ -4,9 +4,10 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 import Menu from "./Menu";
+import response from "./response";
 
 export default function AutoPlaces() {
-  const [address, setAddress, value, selected] = React.useState("");
+  const [address, setAddress, forecast] = React.useState("");
   const [coordinates, setCoordinates] = React.useState({
     lat: null,
     lng: null
@@ -23,9 +24,18 @@ export default function AutoPlaces() {
         "city": temp[0],
         "state": temp[1]
     }
-    const response = this.sendSelected(payload)
+    const response = sendSelected(payload);
+    // renderResponse(response);
 
   };
+
+  // const renderResponse = response => {
+  //   console.log()
+  //   {radars.radars && radars.radars.map((radar,i) => {
+  //     return <option selected>{radar.radar}</option>;
+  // })}
+  // }
+
 
   const sendSelected = payload => {
     return fetch("http://localhost:3100/realtime",{
@@ -38,6 +48,16 @@ export default function AutoPlaces() {
     })
     .then(response => {
         return response.json();
+      })
+      .then(data => {
+        let forecast = data.results.map((forecast)=>{
+          return(
+            <p>Forecast name: {forecast.name}</p>
+
+          )
+        })
+        this.setState({forecast: forecast})
+        console.log("forecast", this.state.forecast);
       })
       .catch(err => console.log(err));
 }

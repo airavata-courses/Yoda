@@ -21,7 +21,7 @@ import lombok.ToString;
 public class Sessiondata {
 	@Id
 	private int sessionId;
-	private Integer userId;
+	private String userId;
 	private String status;
 	private String createdDate;
 	
@@ -29,7 +29,7 @@ public class Sessiondata {
 		super();
 	}
 
-	public Sessiondata(int sessionId, Integer userId, String status, String createdDate) {
+	public Sessiondata(int sessionId, String userId, String status, String createdDate) {
 		super();
 		this.sessionId = sessionId;
 		this.userId = userId;
@@ -45,11 +45,11 @@ public class Sessiondata {
 		this.sessionId = sessionId;
 	}
 
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

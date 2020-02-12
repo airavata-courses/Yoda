@@ -64,7 +64,7 @@ public class KafkaConsumerApplication {
 	}
 	
 	@GetMapping("/findAllActivities/{userId}")
-	public List<Sessiondata> getUserData(@PathVariable Integer userId){
+	public List<Sessiondata> getUserData(@PathVariable String userId){
 		System.out.println("Requested"+userId);
 		List<Sessiondata> list=new ArrayList<Sessiondata>();
 		List<Sessiondata> updatedlist=new ArrayList<Sessiondata>();
@@ -126,6 +126,7 @@ public class KafkaConsumerApplication {
 	public UpdateStatus getJSONMsgFromTopic(UpdateStatus data){
 		Date date=new Date();
 		Sessiondata dataToAdd=new Sessiondata(data.getSessionId(),data.getUserId(),"Completed",date.toString());
+		System.out.println("Consumed kafka"+data.getSessionId());
 		repository.deleteById(data.getSessionId());
 		repository.save(dataToAdd);
 		

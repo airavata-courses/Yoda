@@ -33,6 +33,8 @@ import com.example.demo.Repository.SessionRepository;
 import com.example.demo.model.SessionImage;
 import com.example.demo.model.Sessiondata;
 import com.example.demo.model.UpdateStatus;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -80,14 +82,28 @@ public class KafkaConsumerApplication {
 		
 	}
 	@GetMapping("/findBySessionId/{sessionId}")
-	public List<SessionImage> getData(@PathVariable int sessionId){
+	public List<String> getData(@PathVariable int sessionId){
 		List<SessionImage> list=detailedRepo.findAll();
-		List<SessionImage> updatedlist=new ArrayList<SessionImage>();
-		
+		System.out.println(list.size()+"sessionid"+sessionId);
+		List<String> updatedlist=new ArrayList<String>();
+		ObjectMapper mapper = new ObjectMapper();
 		for(SessionImage data: list) {
+			System.out.println(data.getSessionId()+"check");
 			if(data.getSessionId()==sessionId) {
-				updatedlist.add(data);
+			String jsonString="a";
+				try {
+						jsonString = mapper.writeValueAsString(data);
+						System.out.println(jsonString.substring(0, 20)+"jsonString");
+					} catch (JsonProcessingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						
 			}	
+				System.out.println(jsonString.substring(0, 20)+"jsonString");
+				updatedlist.add(jsonString);
+		}
+		
+	   
 		}
 		
 		return updatedlist;

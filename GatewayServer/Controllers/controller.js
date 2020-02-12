@@ -58,14 +58,11 @@ exports.realtime = async (req, res) => {
   realtimeResponse = await axios
     .get(realtimeURL)
     .then(response => {
-      // console.log(response.data);
       return response.data;
     })
     .catch(error => {
       console.log(error);
     });
-  // console.log("hi");
-  // console.log(realtimeResponse);
   res.status(200).json(realtimeResponse);
 };
 
@@ -73,6 +70,7 @@ exports.activityHelper = async (req, res) => {};
 
 exports.activityRetrieve = async (req, res) => {
   const { user_id } = req.body;
+  console.log(user_id);
   activityListURL =
     process.env.SESSION_MGMT_URL + "/findAllActivities/" + user_id;
   activityList = await axios
@@ -82,16 +80,17 @@ exports.activityRetrieve = async (req, res) => {
     })
     .catch(error => {
       console.log(error);
-      return json("Error getting activities");
+      return [];
     });
-  if (activityList != "Error getting activities") {
+  if (activityList != null) {
     res.status(200).json(activityList);
   } else {
-    res.status(500).json("activityList");
+    res.status(500).json("No activity list");
   }
 };
 
 exports.getActivity = async (req, res) => {
+  console.log("Inside get activity service");
   const { user_id, session_id } = req.body;
   singleActivityURL =
     process.env.SESSION_MGMT_URL + "/findBySessionId/" + session_id;
@@ -103,9 +102,9 @@ exports.getActivity = async (req, res) => {
     })
     .catch(error => {
       console.log(error);
-      // return json("Error getting activity");
+      return [];
     });
-  if (activity != "Error getting activity") {
+  if (activity != null) {
     res.status(200).json(activity);
   } else {
     res.status(500);

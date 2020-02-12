@@ -40,8 +40,6 @@ for t in created_topics:
     if flag == 0:
         val = False
     
-
-@app.route('/')
 def test():
     try:
         if request.method == 'GET':
@@ -59,6 +57,7 @@ def test():
 @app.route('/dataretrieval/<string:radar>/<int:day>/<int:month>/<int:year>/<int:user_id>', methods=['GET', 'POST'])
 def dataRetrieve(radar, day, month, year, user_id):
     global session_id
+    test()
     try:
         if request.method == 'GET':
             availData = conn.get_avail_scans(year, month, day, radar)

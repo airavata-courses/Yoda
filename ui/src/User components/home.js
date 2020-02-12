@@ -14,7 +14,7 @@ class home extends Component {
               <div className="card-body">
                 <h5 className="card-title">Real-time data</h5>
                 <p className="card-text">
-                  Get real-time of weather of any place at the go!
+                  Get real-time weather of any place at the go!
                 </p>
                 <Link to="/real-time" className="btn btn-primary">
                   Get data

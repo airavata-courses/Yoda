@@ -56,8 +56,8 @@ export default function AutoPlaces() {
             {/* <p>Longitude: {coordinates.lng}</p> */}
 
             <div className="container" inline style={{width:500}}>
-            <form class="form-inline mt-3" inline style={{ justifyContent: 'center' }}>
-            <input class="form-control mr-sm-2" type="search" aria-label="Search" {...getInputProps({ placeholder: "Search address" })} />
+            <form className="form-inline mt-3" inline style={{ justifyContent: 'center' }}>
+            <input className="form-control mr-sm-2" type="search" aria-label="Search" {...getInputProps({ placeholder: "Search address" })} />
             </form>
 
             

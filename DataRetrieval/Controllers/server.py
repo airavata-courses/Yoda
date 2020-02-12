@@ -54,7 +54,7 @@ def test():
 '''
 @app.route('/dataretrieval/<string:radar>/<int:day>/<int:month>/<int:year>/<string:user_id>', methods=['GET', 'POST'])
 def dataRetrieve(radar, day, month, year, user_id):
-    # test()
+    test()
     try:
         if request.method == 'GET':
             # print(int(session_id))

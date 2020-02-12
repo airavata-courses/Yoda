@@ -20,7 +20,7 @@ import lombok.ToString;
 @Document(collection = "ActivityDetail")
 public class SessionImage {
 
-	private int sessionId;
+	private String sessionId;
 	private String radar;
 	private int day;
 	private int month;
@@ -32,7 +32,7 @@ public class SessionImage {
 		super();
 	}
 
-	public SessionImage(int sessionId, String radar, int day, int month, int year, String image, String createdDate) {
+	public SessionImage(String sessionId, String radar, int day, int month, int year, String image, String createdDate) {
 		super();
 		this.sessionId = sessionId;
 		this.radar = radar;
@@ -43,11 +43,11 @@ public class SessionImage {
 		this.createdDate = createdDate;
 	}
 
-	public int getSessionId() {
+	public String getSessionId() {
 		return sessionId;
 	}
 
-	public void setSessionId(int sessionId) {
+	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
 	}
 

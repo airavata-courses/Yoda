@@ -82,14 +82,16 @@ public class KafkaConsumerApplication {
 		
 	}
 	@GetMapping("/findBySessionId/{sessionId}")
-	public List<String> getData(@PathVariable int sessionId){
+	public List<String> getData(@PathVariable String sessionId){
 		List<SessionImage> list=detailedRepo.findAll();
 		System.out.println(list.size()+"sessionid"+sessionId);
 		List<String> updatedlist=new ArrayList<String>();
 		ObjectMapper mapper = new ObjectMapper();
 		for(SessionImage data: list) {
-			System.out.println(data.getSessionId()+"check");
-			if(data.getSessionId()==sessionId) {
+			System.out.println(data.getSessionId()+"check"+sessionId);
+			
+			if(data.getSessionId().equals(sessionId)) {
+				System.out.println("Same");
 			String jsonString="a";
 				try {
 						jsonString = mapper.writeValueAsString(data);
@@ -127,7 +129,8 @@ public class KafkaConsumerApplication {
 		Date date=new Date();
 		Sessiondata dataToAdd=new Sessiondata(data.getSessionId(),data.getUserId(),"Completed",date.toString());
 		System.out.println("Consumed kafka"+data.getSessionId());
-		repository.deleteById(data.getSessionId());
+		//repository.deleteById(data.getSessionId());
+		repository.delete(dataToAdd);
 		repository.save(dataToAdd);
 		
 		/*

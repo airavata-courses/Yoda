@@ -20,7 +20,7 @@ import lombok.ToString;
 @Document(collection = "ActivityLists")
 public class Sessiondata {
 	@Id
-	private int sessionId;
+	private String sessionId;
 	private String userId;
 	private String status;
 	private String createdDate;
@@ -29,7 +29,7 @@ public class Sessiondata {
 		super();
 	}
 
-	public Sessiondata(int sessionId, String userId, String status, String createdDate) {
+	public Sessiondata(String sessionId, String userId, String status, String createdDate) {
 		super();
 		this.sessionId = sessionId;
 		this.userId = userId;
@@ -37,11 +37,11 @@ public class Sessiondata {
 		this.createdDate = createdDate;
 	}
 
-	public int getSessionId() {
+	public String getSessionId() {
 		return sessionId;
 	}
 
-	public void setSessionId(int sessionId) {
+	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
 	}
 

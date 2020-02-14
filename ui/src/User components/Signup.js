@@ -79,7 +79,7 @@ class Signup extends Component {
             <div className="alert alert-info"
                 style={{display: open? "": "none"}}
             >
-            New account is successfully created. Please Sign in!
+            New account is successfully created. Please <Link to = "/signin">Sign in!</Link>
             </div>
 
             <form>

@@ -2,13 +2,20 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Menu from "./Menu";
 import { isAuthenticated } from "../auth/index";
+import "./home.css";
 
 class home extends Component {
   render() {
     return (
       <div>
         <Menu />
-        <div className="row ml-auto mr-auto">
+        <br />
+        <br />
+
+        <div
+          className="row ml-auto mr-auto outerContainer"
+          style={{ marginLeft: 200 + "px !important" }}
+        >
           <div className="col-sm-5">
             <div className="card">
               <div className="card-body">

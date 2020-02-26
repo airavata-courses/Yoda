@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Menu from "./Menu";
 import radars from "../radar";
+import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
@@ -11,15 +12,17 @@ class nexrad extends Component {
     super();
     this.state = {
       selectValue: "",
-      Date: new Date(),
-      selectedDate: "",
-      user_id: ""
+      date: new Date(),
+      selectedDate: this.date,
+      user_id: "",
+      session_id: ""
     };
   }
 
   componentDidMount() {
     this.setState({
-      user_id: isAuthenticated() ? isAuthenticated().user._id : ""
+      user_id: isAuthenticated() ? isAuthenticated().user._id : "",
+      session_id: ""
     });
   }
 
@@ -37,7 +40,7 @@ class nexrad extends Component {
     };
     console.log(requested);
     const response = this.sendSelected(requested);
-    console.log(response);
+    console.log(this.session_id);
   };
 
   async sendSelected(requested) {
@@ -45,7 +48,9 @@ class nexrad extends Component {
       "http://localhost:3100/retrievedata",
       requested
     );
-    return response;
+    this.setState({ session_id: response.data });
+    console.log(response.data);
+    return response.data;
   }
 
   handleRadar = e => {
@@ -66,6 +71,7 @@ class nexrad extends Component {
   };
 
   render() {
+    const session_id = this.state.session_id;
     return (
       <div>
         <Menu />
@@ -98,10 +104,23 @@ class nexrad extends Component {
               className="btn btn-outline-secondary"
               type="button"
             >
-              Get Data
+              Submit
             </button>
           </div>
         </div>
+        <br />
+        <br />
+        {session_id ? (
+          <div>
+            <p>An activity was created with ID: {session_id}</p>
+            <h3>
+              Please go to <Link to="/activities">Activities</Link> to view the
+              results of the job
+            </h3>
+          </div>
+        ) : (
+          <p></p>
+        )}
       </div>
     );
   }

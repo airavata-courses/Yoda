@@ -23,14 +23,8 @@ class ActivityList extends React.Component {
         isLoading: false
       });
     } else {
-      const newData = [
-        {
-          sessionId: 10001,
-          status: "No activities yet for the user!!"
-        }
-      ];
       this.setState({
-        users: newData,
+        users: null,
         isLoading: false
       });
     }
@@ -54,7 +48,7 @@ class ActivityList extends React.Component {
           <h1>Activity List for {userName} </h1>
           <hr />
           {error ? <p>{error.message}</p> : null}
-          {!isLoading ? (
+          {!isLoading && users ? (
             users.map((user, index) => {
               return (
                 <div key={index}>
@@ -67,7 +61,11 @@ class ActivityList extends React.Component {
               );
             })
           ) : (
-            <h3>Loading...</h3>
+            <div>
+              <h3>
+                Please create a new job from <Link to={`/`}>Dashboard!</Link>
+              </h3>
+            </div>
           )}
         </React.Fragment>
       </div>

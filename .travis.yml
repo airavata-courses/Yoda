@@ -5,8 +5,6 @@ language: java
     script:
       - mvn clean install
       - mvn spring-boot:run
-    
-
     branches:  
       only:
         - 118-a

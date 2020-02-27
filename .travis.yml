@@ -3,15 +3,16 @@ include:
     language: java
     jdk:
       - openjdk8
-    before_install: cd Session/KafkaConsumer
-    script:
+
+    python: 
+        - "3.6"  
+    script: 
+      - cd Session/KafkaConsumer
       - mvn clean install
       - mvn spring-boot:run
-    language: python
-    python: 
-        - 3.4
-    before_install: cd DataModel
-    script:
+    l - cd ..
+      - cd ..
+      - cd DataModel
       - python -m venv env
       - source env/bin/activate
       - pip install -r requirements.txt

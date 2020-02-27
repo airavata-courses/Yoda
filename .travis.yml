@@ -1,11 +1,10 @@
 language: java
-      jdk:
-        - openjdk8
-      before_install:
-        - cd Session
-      script:
-        - mvn clean install
-        - mvn spring-boot:run
-      branches:  
-        only:
-          - 118-a
+jdk:
+  - openjdk8
+before_install: cd Session
+script:
+  - mvn clean install
+  - mvn spring-boot:run
+branches:  
+  only:
+    - 118-a

@@ -1,0 +1,8 @@
+language: java
+      java:
+        - 4.8
+      before_install:
+        - cd Session
+      script:
+        - mvn clean install
+        - mvn spring-boot:run

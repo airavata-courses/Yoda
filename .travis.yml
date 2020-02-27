@@ -10,7 +10,7 @@ include:
       - cd Session/KafkaConsumer
       - mvn clean install
       - mvn spring-boot:run
-    l - cd ..
+      - cd ..
       - cd ..
       - cd DataModel
       - python -m venv env

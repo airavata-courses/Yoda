@@ -70,7 +70,6 @@ matrix:
       java: 8
       before-script:
         - cd Session/KafkaConsumer
-      install:
-        - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      install: true
       script:
         - mvn clean install

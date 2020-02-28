@@ -7,8 +7,8 @@ matrix:
         - cd GatewayServer
       install: 
         - npm install
-      script: 
-        - npm start
+      #script: 
+       # - npm start
 
 
   # - language: node_js

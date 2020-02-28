@@ -14,8 +14,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor	
 @ToString
 @Document(collection = "ActivityDetail")
 public class SessionImage {
@@ -29,7 +27,7 @@ public class SessionImage {
 	private String createdDate;
 	
 	public SessionImage() {
-		super();
+		//super();
 	}
 
 	public SessionImage(String sessionId, String radar, int day, int month, int year, String image, String createdDate) {

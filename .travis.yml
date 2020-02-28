@@ -73,4 +73,3 @@ matrix:
       install: true
       script:
         - mvn clean install
-        - mvn compile

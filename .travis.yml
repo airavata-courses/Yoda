@@ -11,11 +11,11 @@
   #      # - npm start
 
 
-- language: node_js
-node_js: "10.16"
-install:
-- cd User
-- npm install
+# - language: node_js
+# node_js: "10.16"
+# install:
+# - cd User
+# - npm install
   #   script: 
   #     - npm start
 

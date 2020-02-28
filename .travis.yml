@@ -1,4 +1,4 @@
-dist: xenial
+
 matrix:
   include:
     - language: java
@@ -12,6 +12,7 @@ matrix:
       - mvn clean install
 
     - language: python
+    dist: xenial
     python: 
       - "3.6"
       - "3.7"

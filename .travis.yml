@@ -7,4 +7,4 @@ script:
   - mvn spring-boot:run
 branches:  
   only:
-    - 118-a 
+    - 118-a

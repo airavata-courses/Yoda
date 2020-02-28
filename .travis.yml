@@ -1,27 +1,33 @@
+dist: xenial
 matrix:
   include:
-    -language: java
-    jdk:
-      - openjdk8
-    java: "8"
-    before_install: cd Session/KafkaConsumer
-    install:
-      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-    script:
-      - mvn clean install
+    - language: java
+      jdk:
+        - openjdk8
+      java: "8"
+      before_install: cd Session/KafkaConsumer
+      install:
+        - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      script:
+        - mvn clean install
 
-    -language: python
-    python: "3.6"
-    before_install:
-      - sudo apt-get update
-      - sudo apt-get install python3
-      - cd DataModel
-      - python3 -m venv env
-      - source env/bin/activate	
-    install:
-      - pip3 install -r requirements.txt
-    script:
-      - python3 app.py
+    - language: python
+      python: 
+        - "3.6"
+        - "3.7"
+        - "3.8"
+        - "nightly"
+      before_install:
+        - sudo apt-get update
+        - sudo apt-get install python3
+        - cd DataModel
+        - python3 -m venv env
+        - source env/bin/activate	
+      install:
+        - pip install pipenv --upgrade-strategy=only-if-needed
+        - pip install -r requirements.txt
+      script:
+        - python3 app.py
 
     branches:  
       only:

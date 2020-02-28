@@ -11,8 +11,10 @@ matrix:
       - mvn clean install
 
     -language: python
-    python: "3.4"
-    before_install: 
+    python: "3.6"
+    before_install:
+      - sudo apt-get update
+      - sudo apt-get install python3
       - cd DataModel
       - python3 -m venv env
       - source env/bin/activate	

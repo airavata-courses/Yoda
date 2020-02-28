@@ -21,7 +21,7 @@ matrix:
       - sudo apt-get update
       - sudo apt-get install python3
       - cd DataModel
-      - python3 -m venv env
+      - python -m venv env
       - source env/bin/activate	
     install:
       - pip install pipenv --upgrade-strategy=only-if-needed

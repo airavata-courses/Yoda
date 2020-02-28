@@ -1,12 +1,26 @@
-language: java
-jdk:
-  - openjdk8
-java: "8"
-before_install: cd Session/KafkaConsumer
-install:
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-script:
-  - mvn clean install
-branches:  
-  only:
-    - 118-a
+matrix:
+  include:
+    -language: java
+    jdk:
+      - openjdk8
+    java: "8"
+    before_install: cd Session/KafkaConsumer
+    install:
+      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+    script:
+      - mvn clean install
+
+    -language: python
+    python: "3.4"
+    before_install: 
+      - cd DataModel
+      - python -m venv env
+      - source env/bin/activate	
+    install:
+      - pip install -r requirements.txt
+    script:
+      - python3 app.py
+
+    branches:  
+      only:
+        - 118-a

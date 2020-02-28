@@ -1,33 +1,76 @@
+matrix:
+  include:
+    #dataModelling
+    - language: python
+      python: 3.7
+      before-install:
+        - cd DataModel
+      install:
+        - pip3 install -r requirements.txt
+      script:
+        - python3 app.py
 
- matrix:
-   include:
-  # - language: node_js
-  #     node_js: "10.16"
-  #     before_install:
-  #       - cd GatewayServer
-  #     install: 
-  #       - npm install
-  #     #script: 
-  #      # - npm start
+    #dataRetrieval
+    - language: python
+      python: 3.7
+      before-install:
+        - cd DataRetrieval
+      install:
+        - pip3 install -r requirements.txt
+      script:
+        - python3 app.py
 
+    #userManagement
+    - language: node_js
+      node_js: 10.16
+      before-install:
+        # - npm i -g npm@version-number
+        - cd GatewayServer
+      install:
+        - npm install
+      script: 
+        - npm start
 
-- language: node_js
-node_js: "10.16"
-install:
-- cd User
-- npm install
-script: 
-- npm start
+    #sessionManagement
+    - language: node_js
+      node_js: 10.16
+      before-install:
+        # - npm i -g npm@version-number
+        - cd User
+      install:
+        - npm install
+      script: 
+        - npm start
 
--language: java
-jdk:
-- openjdk8
-java: "8"
-before_install: cd Session/KafkaConsumer
-install:
-- mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-script:
-- mvn clean installs
-    # branches:  
-    #   only:
-    #     - 118-a
+    # #apiGateway
+    # - language: node_js
+    #   node_js: 10.16
+    #   before-install:
+    #     # - npm i -g npm@version-number
+    #     - cd APIgateway
+    #   install:
+    #     - npm install
+    #   script: 
+    #     - npm start
+
+    # #frontend
+    # - language: node_js
+    #   node_js: 10.16
+    #   before-install:
+    #     # - npm i -g npm@version-number
+    #     - cd frontend
+    #   install:
+    #     - npm install
+    #   script: 
+    #     - npm start
+
+    #dataAnalysis
+    - language: java
+      jdk: openjdk8
+      java: 8
+      before-script:
+        - cd Session/KafkaConsumer
+      install:
+        - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      script:
+        - mvn clean install

@@ -1,6 +1,6 @@
 
-matrix:
-  include:
+# matrix:
+#   include:
   # - language: node_js
   #     node_js: "10.16"
   #     before_install:
@@ -19,7 +19,7 @@ matrix:
   #   script: 
   #     - npm start
 
-  - language: java
+   language: java
       jdk:
         - openjdk8
       java: "8"

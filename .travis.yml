@@ -1,15 +1,15 @@
 
 matrix:
   include:
-    # - language: java
-    # jdk:
-    #   - openjdk8
-    # java: "8"
-    # before_install: cd Session/KafkaConsumer
-    # install:
-    #   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-    # script:
-    #   - mvn clean install
+    - language: java
+    jdk:
+      - openjdk8
+    java: "8"
+    before_install: cd Session/KafkaConsumer
+    install:
+      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+    script:
+      - mvn clean install
 
     - language: node_js
       node_js: "10.16"
@@ -20,13 +20,13 @@ matrix:
        # - npm start
 
 
-    # - language: node_js
-    #   node_js: "10.16"
-    #   before-install:
-    #     - cd User
-    #     - npm install
-    #   #script: 
-    #   #  - npm start
+    - language: node_js
+      node_js: "10.16"
+      install:
+        - cd User
+        - npm install
+      #script: 
+      #  - npm start
 
     # branches:  
     #   only:

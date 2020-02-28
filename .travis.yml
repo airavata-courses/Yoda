@@ -4,7 +4,6 @@ jdk:
 before_install: cd Session/KafkaConsumer
 script:
   - mvn clean install
-  - mvn spring-boot:run
 branches:  
   only:
     - 118-a

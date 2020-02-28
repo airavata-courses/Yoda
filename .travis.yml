@@ -19,9 +19,9 @@ matrix:
       - "3.8"
       - "nightly"
     before_install:
+      - cd DataModel
       - sudo apt-get update
       - sudo apt-get install python3
-      - cd DataModel
       - python -m venv env
       - source env/bin/activate	
     install:

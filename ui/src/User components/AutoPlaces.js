@@ -30,27 +30,10 @@ export default function AutoPlaces() {
     // renderResponse(response);
   };
 
-  // const renderResponse = response => {
-  //   console.log()
-  //   {radars.radars && radars.radars.map((radar,i) => {
-  //     return <option selected>{radar.radar}</option>;
-  // })}
-  // }
-
   async function sendSelected(payload) {
     let response = await axios.post("http://localhost:3100/realtime", payload);
     console.log(response.data);
-    // .then(response => {
-    //   return response.json();
-    // })
-    // .then(data => {
-    //   let forecast = data.results.map(forecast => {
-    //     return <p>Forecast name: {forecast.name}</p>;
-    //   });
-    //   this.setState({ forecast: forecast });
-    //   console.log("forecast", this.state.forecast);
-    // })
-    // .catch(err => console.log(err));
+    return response.data;
   }
 
   return (

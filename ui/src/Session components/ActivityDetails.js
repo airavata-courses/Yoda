@@ -55,7 +55,8 @@ class ActivityDetails extends React.Component {
       <div>
         <React.Fragment>
           <Menu />
-          <h1>{userName}</h1>
+          <h1>Nexrad Job Details</h1>
+          <br />
           {error ? <p>{error.message}</p> : null}
           {!isLoading ? (
             users.map((user, index) => {
@@ -74,7 +75,7 @@ class ActivityDetails extends React.Component {
               );
             })
           ) : (
-            <h3>Loading...</h3>
+            <h3>Loading..</h3>
           )}
         </React.Fragment>
       </div>

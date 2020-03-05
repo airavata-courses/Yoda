@@ -13,9 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor	
+@Data	
 @ToString
 
 public class UpdateStatus {
@@ -29,7 +27,7 @@ public class UpdateStatus {
 		this.userId = userId;
 	}
 	public UpdateStatus() {
-		super();
+		//super();
 	}
 	public String getSessionId() {
 		return sessionId;

@@ -13,9 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor	
+@Data	
 @ToString
 @Document(collection = "ActivityLists")
 public class Sessiondata {
@@ -26,7 +24,7 @@ public class Sessiondata {
 	private String createdDate;
 	
 	public Sessiondata() {
-		super();
+		//super();
 	}
 
 	public Sessiondata(String sessionId, String userId, String status, String createdDate) {

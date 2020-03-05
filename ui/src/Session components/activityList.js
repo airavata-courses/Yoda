@@ -45,7 +45,7 @@ class ActivityList extends React.Component {
       <div>
         <Menu />
         <React.Fragment>
-          <h1>Activity List for {userName} </h1>
+          <h2>Activity List for {userName} </h2>
           <hr />
           {error ? <p>{error.message}</p> : null}
           {!isLoading && users ? (
@@ -62,9 +62,11 @@ class ActivityList extends React.Component {
             })
           ) : (
             <div>
-              <h3>
+              <br />
+              <p>No activity has been created yet!</p>
+              <p>
                 Please create a new job from <Link to={`/`}>Dashboard!</Link>
-              </h3>
+              </p>
             </div>
           )}
         </React.Fragment>

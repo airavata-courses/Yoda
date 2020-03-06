@@ -1,8 +1,8 @@
 language: java
-      jdk: openjdk8
-      java: 8
-      before-script:
-        - cd Session/KafkaConsumer
-      install: true
-      script:
-        - mvn clean install
+jdk: openjdk8
+java: 8
+before-script:
+- cd Session/KafkaConsumer
+install: true
+script:
+- mvn clean install

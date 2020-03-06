@@ -292,4 +292,4 @@ export const response = {
       "type": "Feature"
     }
   }
-  export default response;
+export default response;

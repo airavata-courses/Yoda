@@ -36,12 +36,12 @@ public class KafkaConsumerApplicationTests{
 	//@Autowired
 	//private ActivityDetailsRepository detailedRepo;
 	
-	@Test
-	public void getUsersTest() {
-		when(repository.findAll()).thenReturn(Stream.of(new Sessiondata("goutham","123","ex","date"),new Sessiondata("tanvi","123","ex","date")).collect(Collectors.toList()));
-		assertEquals(2, us.getUsers().size());
+	// @Test
+	// public void getUsersTest() {
+	// 	when(repository.findAll()).thenReturn(Stream.of(new Sessiondata("goutham","123","ex","date"),new Sessiondata("tanvi","123","ex","date")).collect(Collectors.toList()));
+	// 	assertEquals(2, us.getUsers().size());
 		
-	}
+	// }
 	
 	@Test
 	public void saveSessionTest() {

@@ -1,8 +1,8 @@
 language: python
-      python: 3.7
-      before-install:
-        - cd DataRetrieval
-      install:
-        - pip3 install -r requirements.txt
-      script:
-        - python3 app.py
+python: 3.7
+before-install:
+- cd DataRetrieval
+install:
+- pip3 install -r requirements.txt
+script:
+- python3 app.py

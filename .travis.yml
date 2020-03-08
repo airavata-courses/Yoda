@@ -8,9 +8,9 @@ script:
 after-success:
   - docker login -u $username -p $password
   - export TAG=`$(docker images | awk '($1 == "teamyoda/datapostprocess") {print $2 += 0.01; exit}')`
-  - echo TAG
-  - docker build -t teamyoda/datapostprocess:TAG .
-  - docker push teamyoda/datapostprocess:TAG
+  - echo $TAG
+  - docker build -t teamyoda/datapostprocess:$AG .
+  - docker push teamyoda/datapostprocess:$TAG
 branches:
   only:
     - DataPostProcessorAPI

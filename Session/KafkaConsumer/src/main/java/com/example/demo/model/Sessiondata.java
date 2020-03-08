@@ -66,6 +66,12 @@ public class Sessiondata {
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Sessiondata [sessionId=" + sessionId + ", userId=" + userId + ", status=" + status + ", createdDate="
+				+ createdDate + "]";
+	}
 	
 
 	

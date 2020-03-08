@@ -7,8 +7,8 @@ script:
   - echo "Hi from Post process"
 after-success:
   - docker login -u $username -p $password
-  - docker build -t teamyoda/datapostprocess:latest .
-  - docker push teamyoda/datapostprocess:latest
+  - docker build -t teamyoda/datapostprocess:1.0 .
+  - docker push teamyoda/datapostprocess:1.0
 branches:
   only:
     - DataPostProcessorAPI

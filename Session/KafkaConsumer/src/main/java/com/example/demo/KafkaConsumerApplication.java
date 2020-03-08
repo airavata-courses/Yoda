@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentMap;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -54,16 +55,19 @@ public class KafkaConsumerApplication {
 		return "Added session with data";
 		
 	}
+
+	
 	
 	@GetMapping("/findAllActivities/{userId}")
 	public List<Sessiondata> getUserData(@PathVariable String userId){
 		System.out.println("Requested"+userId);
 		List<Sessiondata> list=new ArrayList<Sessiondata>();
 		List<Sessiondata> updatedlist=new ArrayList<Sessiondata>();
+		System.out.println("above find all");
 		list=repository.findAll();
+		System.out.println("below find all");
 		
 		for(Sessiondata data: list) {
-			System.out.println(data.getUserId()+"eshfghsrefvhgesvfh"+userId);
 			if(data.getUserId().equals(userId)) {
 				updatedlist.add(data);
 				System.out.println("sdfesd"+updatedlist);

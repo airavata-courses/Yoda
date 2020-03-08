@@ -60,13 +60,13 @@ exports.dataRetrieve = async (req, res) => {
         .catch(error => {
           console.log(error);
         });
-      return javaResponse;
+      return response;
     })
     .catch(error => {
       console.log(error);
     });
 
-  res.status(200).json(axiosResponse);
+  res.status(200).json(axiosResponse.data["sessionId"]);
 };
 
 exports.realtime = async (req, res) => {

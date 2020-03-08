@@ -8,8 +8,8 @@ script:
 after-success:
   - docker login -u $username -p $password
   - echo $TRAVIS_BUILD_NUMBER
-  - docker build -t teamyoda/datapostprocess:$TRAVIS_BUILD_NUMBER .
-  - docker push teamyoda/datapostprocess:$TRAVIS_BUILD_NUMBER
+  - docker build -t teamyoda/datapostprocess:latest .
+  - docker push teamyoda/datapostprocess:latest
 branches:
   only:
     - DataPostProcessorAPI

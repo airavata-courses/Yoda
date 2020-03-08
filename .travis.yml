@@ -11,5 +11,5 @@ script:
 - mvn clean install
 after-success:
 - docker login -u $username -p $password
-- docker build -t teamyoda/sessionManagement:latest .
-- docker push teamyoda/sessionManagement:latest
+- docker build -t teamyoda/sessionmanagement:latest .
+- docker push teamyoda/sessionmanagement:latest

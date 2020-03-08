@@ -1,4 +1,4 @@
-language: python:3.7
+language: python:3.6
 before-install:
   - cd DataPostProcess
 install:
@@ -7,10 +7,9 @@ script:
   - echo "Hi from Post process"
 after-success:
   - docker login -u $username -p $password
-  - export TAG=`$(docker images | awk '($1 == "teamyoda/datapostprocess") {print $2 += 0.01; exit}')`
-  - echo $TAG
-  - docker build -t teamyoda/datapostprocess:$AG .
-  - docker push teamyoda/datapostprocess:$TAG
+  - echo $TRAVIS_BUILD_NUMBER
+  - docker build -t teamyoda/datapostprocess:$TRAVIS_BUILD_NUMBER .
+  - docker push teamyoda/datapostprocess:$TRAVIS_BUILD_NUMBER
 branches:
   only:
     - DataPostProcessorAPI

@@ -11,3 +11,6 @@ after-success:
 - docker login -u $username -p $password
 - docker build -t teamyoda/gatewayserver:latest .
 - docker push teamyoda/gatewayserver:latest
+branches:
+only:
+- GatewayServerAPI

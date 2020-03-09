@@ -1,8 +1,17 @@
 language: python
 python: 3.7
+services:
+- docker
 before-install:
 - cd DataRetrieval
 install:
 - pip3 install -r requirements.txt
 script:
-- python3 app.py
+#- python3 app.py
+after-success:
+- docker login -u $username -p $password
+- docker build -t teamyoda/dataretrival:latest .
+- docker push teamyoda/dataretrival:latest
+branches:
+only:
+- DataRetrivalAPI

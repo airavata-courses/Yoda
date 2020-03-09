@@ -1,19 +1,20 @@
 language: node_js
 node_js: 10.16
 services:
-- docker
+    - docker
 
 before-install:
 # - npm i -g npm@version-number
-- cd GatewayServer
+    - cd GatewayServer
 install:
-- npm install
+    - npm install
 script: 
- - npm run test
+    - npm run test
 after-success:
-- docker login -u $username -p $password
-- docker build -t teamyoda/gatewayserver:latest .
-- docker push teamyoda/gatewayserver:latest
+    - cd GatewayServer
+    - docker login -u $username -p $password
+    - docker build -t teamyoda/gatewayserver:latest .
+    - docker push teamyoda/gatewayserver:latest
 branches:
-only:
-- GatewayServerAPI
+    only:
+        - GatewayServerAPI

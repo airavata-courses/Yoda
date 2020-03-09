@@ -1,5 +1,7 @@
 language: node_js
 node_js: 10.16
+services:
+- docker
 before-install:
 # - npm i -g npm@version-number
 - cd User
@@ -7,3 +9,11 @@ install:
 - npm install
 script: 
 - npm run test
+after-success:
+- cd User
+- docker login -u $username -p $password
+- docker build -t teamyoda/userapi:latest .
+- docker push teamyoda/userapi:latest
+branches:
+only:
+- UserAPI

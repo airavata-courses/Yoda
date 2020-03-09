@@ -9,6 +9,7 @@ install:
 script:
 - echo "Hie in data retrival"
 after-success:
+- cd DataRetrieval
 - docker login -u $username -p $password
 - docker build -t teamyoda/dataretrival:latest .
 - docker push teamyoda/dataretrival:latest

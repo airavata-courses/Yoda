@@ -6,4 +6,8 @@ before-install:
 install:
 - npm install
 script: 
-- npm start
+# - npm start
+after-success:
+- docker login -u $username -p $password
+- docker build -t teamyoda/gatewayserver:latest .
+- docker push teamyoda/gatewayserver:latest

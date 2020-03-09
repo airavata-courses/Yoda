@@ -1,8 +1,14 @@
 language: python
 python: 3.7
+services:
+- docker
 before-install:
 - cd DataModel
 install:
 - pip3 install -r requirements.txt
 script:
 - python3 app.py
+after-success:
+- docker login -u $username -p $password
+- docker build -t teamyoda/datamodel:latest .
+- docker push teamyoda/datamodel:latest

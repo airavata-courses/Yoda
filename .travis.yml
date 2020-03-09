@@ -9,6 +9,7 @@ install:
 script:
 - echo "Hi from model process"
 after-success:
+- cd DataModel
 - docker login -u $username -p $password
 - docker build -t teamyoda/datamodel:latest .
 - docker push teamyoda/datamodel:latest

@@ -2,88 +2,75 @@ version: '3'
 
 services:
   zookeeper:
-    image: wurstmeister/zookeeper:latest
+    image: wurstmeister/zookeeper
     ports:
-      - "2181"
+      - 2181:2181
+    hostname: zookeeper
     networks:
       - yoda
 
   kafka:
-    container_name: kafkaService
-    image: wurstmeister/kafka:latest
+    image: wurstmeister/kafka
+    command: [start-kafka.sh]
     depends_on:
       - zookeeper
     networks:
       - yoda
     ports:
-      - "9092:9092"
+      - 9092:9092
+    hostname: kafka
     environment:
       KAFKA_ADVERTISED_HOST_NAME: kafka
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://:9092
-      KAFKA_LISTENERS: PLAINTEXT://:9092
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_PORT: 9092
       KAFKA_CREATE_TOPICS: "test:1:1,data-model:1:1,data-post:1:1,data-session:1:1"
-    # healthcheck:
-    #   test: ["CMD", "/opt/kafka/bin/kafka-topics.sh", "--list", "--zookeeper", "zookeeper:2181"]
-    #   interval: 30s
-    #   timeout: 10s
-    #   retries: 3
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
-  # gateway_server:
-  #   build: "../GatewayServer"
-  #   expose:
-  #     - 3100
-  #   # ports:
-  #   #   - "9092"
-  #   depends_on:
-  #     - "kafka"
-  #   restart: unless-stopped
-  #   networks:
-  #     - yoda
+  gateway_server:
+    build: "../GatewayServer"
+    ports:
+      - 3100:3100
+    depends_on:
+      - "kafka"
+    restart: on-failure
+    networks:
+      - yoda
   
   data_retrieval:
     build: "../DataRetrieval"
     depends_on: 
       - kafka
-      # - gateway_server
-    # expose:
-    #   - 3300
     ports: 
-      - "3300:3300"
-    restart: unless-stopped
+      - 3300:3300
+    restart: on-failure
     networks: 
       - yoda
     
-  # user:
-  #   build: "../User"
-  #   expose:
-  #     - 3200
-  #   # ports:
-  #   #   - "3200:3200"
-  #   restart: unless-stopped
-  #   networks: 
-  #     - yoda
+  user:
+    build: "../User"
+    ports:
+      - 3200:3200
+    restart: on-failure
+    networks: 
+      - yoda
   
-  # realtime:
-  #   build: "../RealTime"
-  #   depends_on: 
-  #     - kafka
-  #     - gateway_server
-  #   ports:
-  #     - "3500:3500"
-  #   restart: unless-stopped
-  #   networks: 
-  #     - yoda
+  realtime:
+    build: "../RealTime"
+    depends_on: 
+      - kafka
+    ports:
+      - 3500:3500
+    restart: on-failure
+    networks: 
+      - yoda
     
   data_model:
     build: "../DataModel"
     depends_on: 
       - kafka
       - data_retrieval
-    ports: 
-      - "3600:3600"
-    restart: unless-stopped
+    restart: on-failure
     networks: 
       - yoda
     
@@ -91,36 +78,31 @@ services:
     build: "../DataPostProcess"
     depends_on: 
       - kafka
-      - data_retrieval
-    ports:
-      - "3700:3700"
-    restart: unless-stopped
+    restart: on-failure
     networks: 
       - yoda
   
-  # session:
-  #   build: "../Session/KafkaConsumer"
-  #   depends_on: 
-  #     - kafka
-  #     # - gateway_server
-  #   ports:
-  #     - "3400:3400"
-  #   # restart: unless-stopped
-  #   networks: 
-  #     - yoda
+  session:
+    build: "../Session/KafkaConsumer"
+    depends_on: 
+      - kafka
+    ports:
+      - 3400:3400
+    restart: on-failure
+    networks: 
+      - yoda
   
-  # frontend:
-  #   build: "../ui"
-  #   depends_on: 
-  #     - gateway_server
-  #     - user
-  #   # expose: 
-  #   #   - 3000
-  #   ports:
-  #     - "3000:3000"
-  #   restart: unless-stopped
-  #   networks: 
-  #     - yoda
+  frontend:
+    build: "../ui"
+    depends_on: 
+      - gateway_server
+      - user
+    ports:
+      - 3000:3000
+    restart: on-failure
+    networks: 
+      - yoda
     
 networks: 
   yoda:
+    external: true

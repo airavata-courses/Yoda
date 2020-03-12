@@ -58,6 +58,9 @@ export const isAuthenticated = () => {
   if (typeof window == "undefined") {
     return false;
   }
+  if (localStorage.getItem("jwt") == "undefined") {
+    localStorage.removeItem("jwt");
+  }
   if (localStorage.getItem("jwt") != null) {
     return JSON.parse(localStorage.getItem("jwt"));
   } else {

@@ -66,6 +66,7 @@ exports.dataRetrieve = async (req, res) => {
       console.log(error);
     });
 
+  // add null checks later!!
   res.status(200).json(axiosResponse.data["sessionId"]);
 };
 

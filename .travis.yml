@@ -1,6 +1,4 @@
 language: python:3.6
-services:
-    - docker
 before-install:
   - cd RealTime
 install:

@@ -1,33 +1,20 @@
+language: node_js
+node_js: 10.16
+services:
+    - docker
 
-matrix:
-  include:
-    - language: java
-    jdk:
-      - openjdk8
-    java: "8"
-    before_install: cd Session/KafkaConsumer
-    install:
-      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-    script:
-      - mvn clean install
-
-    - language: python
-    dist: xenial
-    python: 
-      - "3.6"
-      - "3.7"
-      - "3.8"
-      - "nightly"
-    before_install:
-      - cd DataModel
-      - sudo apt-get update
-      - sudo apt-get install python3
-    install:
-      - pip3 install pipenv --upgrade-strategy=only-if-needed
-      - pip3 install -r requirements.txt
-    script:
-      - python3 app.py
-
-    branches:  
-      only:
-        - 118-a
+before-install:
+# - npm i -g npm@version-number
+    - cd ui
+install:
+    - npm install
+script: 
+    - npm run test
+after-success:
+    - cd GatewayServer
+    - docker login -u $username -p $password
+    - docker build -t teamyoda/userinterface:latest .
+    - docker push teamyoda/userinterface:latest
+branches:
+    only:
+        - UserInterface

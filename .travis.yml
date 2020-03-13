@@ -1,12 +1,13 @@
 language: python:3.6
+services:
+    - docker
 before-install:
   - cd RealTime
 install:
   - pip3 install -r requirements.txt
 script:
   - echo "Hi from Real Time"
-after-success:
-  - RealTime
+after-success: 
   - docker login -u $username -p $password
   - echo $TRAVIS_BUILD_NUMBER
   - docker build -t teamyoda/realtime:latest .

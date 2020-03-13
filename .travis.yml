@@ -6,6 +6,7 @@ install:
 script:
   - echo "Hi from Real Time"
 after-success:
+  - RealTime
   - docker login -u $username -p $password
   - echo $TRAVIS_BUILD_NUMBER
   - docker build -t teamyoda/realtime:latest .

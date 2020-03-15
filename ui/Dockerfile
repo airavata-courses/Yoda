@@ -1,17 +1,22 @@
-FROM node:10
+FROM node:alpine as builder
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
-COPY package.json .
+COPY . /usr/src/app
 
-COPY package-lock.json .
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
+ADD package.json /usr/src/app/package.json
 RUN npm install
+RUN npm run build
+# CMD ["npm", "start"]
 
-RUN npm audit fix
-
-COPY . .
+FROM nginx:alpine
+RUN rm -rf /usr/share/nginx/html/*
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx/nginx.conf /etc/nginx/conf.d
+COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 
 EXPOSE 3000
 
-CMD [ "npm", "start" ]
+CMD ["nginx", "-g", "daemon off;"]

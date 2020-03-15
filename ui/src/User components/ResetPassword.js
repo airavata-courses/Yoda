@@ -29,7 +29,7 @@ class ResetPassword extends Component {
   };
 
   resetPassword = resetInfo => {
-    return fetch("http://localhost:3200/reset-password/", {
+    return fetch("/user/reset-password/", {
       method: "PUT",
       headers: {
         Accept: "application/json",

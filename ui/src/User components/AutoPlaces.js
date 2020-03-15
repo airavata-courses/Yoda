@@ -31,7 +31,7 @@ export default function AutoPlaces() {
   };
 
   async function sendSelected(payload) {
-    let response = await axios.post("http://localhost:3100/realtime", payload);
+    let response = await axios.post("/gatewayservice/realtime", payload);
     console.log(response.data);
     return response.data;
   }

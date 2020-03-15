@@ -1,0 +1,37 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: frontend_dev
+spec:
+  type: NodePort
+  selector:
+    app: frontend_dev
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+      nodePort: 30000
+  type: LoadBalancer
+---
+apiVersion: app/v1
+kind: Deployment
+metadata:
+  name: frontend_dev
+  labels:
+    app: frontend_dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend_dev
+  template:
+    metadata:
+      labels:
+        app: frontend_dev
+    spec:
+      containers:
+        - name: frontend_dev
+          imagePullPolicy: Always
+          image: teamyoda/frontend
+          ports:
+            - containerPort: 3000

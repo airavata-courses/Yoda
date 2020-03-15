@@ -23,7 +23,7 @@ class ForgotPassword extends Component {
 
   forgotPassword1 = email => {
     console.log("email: ", email);
-    return fetch("http://localhost:3200/forgot-password/", {
+    return fetch("/user/forgot-password/", {
       method: "PUT",
       headers: {
         Accept: "application/json",

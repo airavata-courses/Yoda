@@ -16,7 +16,7 @@ class Activities extends Component {
   }
 
   fetchActivities = userId => {
-    fetch("http://localhost:3100/retrieveactivities", {
+    fetch("/gatewayservice/retrieveactivities", {
       method: "POST",
       headers: {
         Accept: "application/json",

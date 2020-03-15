@@ -52,7 +52,7 @@ class Signin extends Component {
   };
 
   signin = user => {
-    return fetch("http://localhost:3200/signin", {
+    return fetch("/user/signin", {
       method: "POST",
       headers: {
         Accept: "application/json",

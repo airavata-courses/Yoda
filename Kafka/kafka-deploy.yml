@@ -2,16 +2,16 @@
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-    name: kafka-broker0
+  name: kafka-broker0
 spec:
-    template:
+  template:
     metadata:
-        labels:
+      labels:
         app: kafka
         id: "0"
     spec:
-        containers:
-        - name: kafka
+      containers:
+      - name: kafka
         image: wurstmeister/kafka
         ports:
         - containerPort: 9092
@@ -25,4 +25,4 @@ spec:
         - name: KAFKA_BROKER_ID
             value: "0"
         - name: KAFKA_CREATE_TOPICS
-            value: api-gateway-service:1:1
+            value: "test:1:1,data-model:1:1,data-post:1:1,data-session:1:1"

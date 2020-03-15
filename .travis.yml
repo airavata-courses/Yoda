@@ -9,7 +9,7 @@ before-install:
 install:
     - npm install
 script: 
-    - npm run est
+    - npm run test
     - echo "hi"
 after-success:
     - cd GatewayServer

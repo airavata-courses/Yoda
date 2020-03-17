@@ -12,7 +12,7 @@ class ActivityDetails extends React.Component {
   };
 
   async fetchUsers(payload) {
-    let response = await axios.post("/gatewayservice/getactivity", payload);
+    let response = await axios.post("/gatewayserver/getactivity", payload);
     console.log(response.data);
     if (response.data) {
       this.setState({

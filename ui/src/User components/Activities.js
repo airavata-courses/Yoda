@@ -17,7 +17,7 @@ class Activities extends Component {
   }
 
   async fetchActivities(userId) {
-    // fetch("/gatewayservice/retrieveactivities", {
+    // fetch("/gatewayserver/retrieveactivities", {
     //   method: "POST",
     //   headers: {
     //     Accept: "application/json",
@@ -34,7 +34,7 @@ class Activities extends Component {
     //   })
     //   .catch(err => console.log(err));
     let axiosResponse = await axios.post(
-      "/gatewayservice/retrieveactivities",
+      "/gatewayserver/retrieveactivities",
       userId
     );
     console.log(axiosResponse.data);

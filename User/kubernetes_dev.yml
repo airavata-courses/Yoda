@@ -10,10 +10,10 @@ spec:
     - protocol: TCP
       port: 3200
       targetPort: 3200
-      nodePort: 32000
+      nodePort: 30200
   type: LoadBalancer
 ---
-apiVersion: app/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user
@@ -32,6 +32,6 @@ spec:
       containers:
         - name: user
           imagePullPolicy: Always
-          image: teamyoda/userapi
+          image: teamyoda/userapi:latest
           ports:
             - containerPort: 3200

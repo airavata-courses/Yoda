@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Signup extends Component {
   constructor() {
@@ -42,21 +43,24 @@ class Signup extends Component {
     });
   };
 
-  signup = user => {
-    return fetch("/user/signup", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:8080"
-      },
-      body: JSON.stringify(user)
-    })
-      .then(response => {
-        return response.json();
-      })
-      .catch(err => console.log(err));
-  };
+  async signup(user) {
+    // return fetch("/user/signup", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //     "Access-Control-Allow-Origin": "http://localhost:8080"
+    //   },
+    //   body: JSON.stringify(user)
+    // })
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .catch(err => console.log(err));
+    let axiosResponse = await axios.post("/user/signup", user);
+    console.log(axiosResponse.data);
+    return axiosResponse.data;
+  }
 
   render() {
     const { name, email, password, error, open } = this.state;

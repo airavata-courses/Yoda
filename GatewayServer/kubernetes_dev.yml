@@ -10,7 +10,7 @@ spec:
     - protocol: TCP
       port: 3100
       targetPort: 3100
-      nodePort: 31000
+      nodePort: 30100
   type: LoadBalancer
 ---
 

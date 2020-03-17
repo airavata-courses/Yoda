@@ -2,37 +2,38 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: frontend-dev
+  name: gatewayserver
 spec:
   type: NodePort
   selector:
-    app: frontend-dev
+    app: gatewayserver
   ports:
     - protocol: TCP
-      port: 3000
-      targetPort: 3000
-      nodePort: 30000
+      port: 3100
+      targetPort: 3100
+      nodePort: 31000
   type: LoadBalancer
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-dev
+  name: gatewayserver
   labels:
-    app: frontend-dev
+    app: gatewayserver
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: frontend-dev
+      app: gatewayserver
   template:
     metadata:
       labels:
-        app: frontend-dev
+        app: gatewayserver
     spec:
       containers:
-        - name: frontend-dev
+        - name: gatewayserver
           imagePullPolicy: Always
-          image: teamyoda/userinterface:latest
+          image: teamyoda/gatewayserver:latest
           ports:
-            - containerPort: 3000
+            - containerPort: 3100

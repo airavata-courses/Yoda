@@ -68,6 +68,7 @@ class Signin extends Component {
     //   .catch(err => console.log(err));
 
     let axiosRes = axios.post("/user/signin", user);
+    console.log(axiosRes);
     return axiosRes.data;
   };
 

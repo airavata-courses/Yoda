@@ -18,11 +18,11 @@ from nexradapi import payload_create
 
 conn = nexradaws.NexradAwsInterface()
 
-consumer = KafkaConsumer("data-post", bootstrap_servers=['kafka:9092'])
+consumer = KafkaConsumer("data-post", bootstrap_servers=['kafka-service:9092'])
 # , auto_offset_reset='earliest', group_id='kafkagroupid', enable_auto_commit=True,/
 						#  bootstrap_servers=['localhost:9092'], api_version=(0, 10))
                          
-producer = KafkaProducer(bootstrap_servers=['kafka:9092'])
+producer = KafkaProducer(bootstrap_servers=['kafka-service:9092'])
 
 for messages in consumer:
     if messages != None:

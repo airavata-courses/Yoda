@@ -11,7 +11,7 @@ spec:
     - protocol: TCP
       port: 3300
       targetPort: 3300
-      nodePort: 33000
+      nodePort: 32300
   type: LoadBalancer
 ---
 apiVersion: apps/v1

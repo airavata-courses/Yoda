@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
+import response from "./response";
 
 class Signin extends Component {
   constructor() {
@@ -38,6 +39,7 @@ class Signin extends Component {
     };
     // console.log(user);
     this.signin(user).then(data => {
+      console.log(data);
       if (data && data.error) {
         this.setState({ error: data.error, loading: false });
       } else {
@@ -53,23 +55,21 @@ class Signin extends Component {
   };
 
   signin = user => {
-    // return fetch("/user/signin", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "http://localhost:8080"
-    //   },
-    //   body: JSON.stringify(user)
-    // })
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .catch(err => console.log(err));
+    return fetch("/user/signin", {
+      method: "POST",
+      body: JSON.stringify(user)
+    })
+      .then(response => {
+        return response.json();
+      })
+      .catch(err => console.log(err));
 
-    let axiosRes = axios.post("/user/signin", user);
-    console.log(axiosRes);
-    return axiosRes.data;
+    // let axiosRes = await axios.post("149.165.171.52:30200/signin", user);
+    // .then(response => {
+    //   return response.data;
+    // });
+    // console.log(axiosRes);
+    // return axiosRes;
   };
 
   render() {

@@ -1,7 +1,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: frontend_dev
+  name: frontend-dev
 spec:
   type: NodePort
   selector:

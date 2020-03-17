@@ -54,23 +54,22 @@ class Signin extends Component {
     });
   };
 
-  signin = user => {
-    return fetch("/user/signin", {
-      method: "POST",
-      body: JSON.stringify(user)
-    })
-      .then(response => {
-        return response.json();
-      })
-      .catch(err => console.log(err));
-
-    // let axiosRes = await axios.post("149.165.171.52:30200/signin", user);
+  async signin(user) {
+    // return fetch("/user/signin", {
+    //   method: "POST",
+    //   body: JSON.stringify(user)
+    // })
+    //   .then(response => {
+    //     return response.json();
+    //   })
+    //   .catch(err => console.log(err));
+    let axiosRes = await axios.post("/user/signin", user);
     // .then(response => {
     //   return response.data;
     // });
-    // console.log(axiosRes);
-    // return axiosRes;
-  };
+    console.log(axiosRes);
+    return axiosRes.data;
+  }
 
   render() {
     const { email, password, error, redirectToReferer, loading } = this.state;

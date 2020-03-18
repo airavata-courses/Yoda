@@ -60,11 +60,13 @@ def dataRetrieve(radar, day, month, year, user_id):
     try:
         if request.method == 'GET':
             # print(int(session_id))
+            print("Inside the data retrieval stub")
+            print("Trying to get the avaiable scans from nexrad")
             availData = conn.get_avail_scans(year, month, day, radar)
-            print(availData)
+            print("Available scans are:", availData)
             session_id = str(uuid.uuid4())
             
-            print(session_id)
+            print("session_id:", session_id)
             payload = {}
             payload['availData'] = availData[0]
             payload['session_id'] = session_id
@@ -74,10 +76,11 @@ def dataRetrieve(radar, day, month, year, user_id):
             payload['year'] = year
             payload['user_id'] = user_id
             pickleData = pickle.dumps(payload)
-            print(payload)
+            print("Passed payload through kafka",payload)
             producer.send('data-model', key=b'foo', value=pickleData)
             response = {}
             response['sessionId'] = session_id
+            print("sent message through kafka, returning session id")
             return jsonify(response)
 
     except Exception as e:

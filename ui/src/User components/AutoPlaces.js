@@ -45,7 +45,7 @@ export default function AutoPlaces() {
     };
 
   async function sendSelected(payload) {
-    let response = await axios.post("http://localhost:3100/realtime", payload);
+    let response = await axios.post("/gatewayserver/realtime", payload);
     console.log(response);
     if (!response.data.data.forecast["detailedForecast"]){
       console.log("undefined response");

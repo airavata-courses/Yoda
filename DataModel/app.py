@@ -13,11 +13,13 @@ conn = nexradaws.NexradAwsInterface()
                          
 consumer = KafkaConsumer('data-model', bootstrap_servers=['kafka-service:9092'])
 producer = KafkaProducer(bootstrap_servers=['kafka-service:9092'])
+print("Connected kafka consumer")
 
 for messages in consumer:
-    print(messages.topic)
-    print(messages.key)
-    print(pickle.loads(messages.value))
+    print("Inside the kafka consumer for data model")
+    print("Message topic:", messages.topic)
+    print("Message key:", messages.key)
+    print("Message payload:", pickle.loads(messages.value))
     print('\n')
     files = messages.value
     # downloaded_data = conn.download(files, '/data')

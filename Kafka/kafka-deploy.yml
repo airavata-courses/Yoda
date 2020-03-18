@@ -25,4 +25,4 @@
           - name: KAFKA_BROKER_ID
             value: "0"
           - name: KAFKA_CREATE_TOPICS
-            value: test:1:1,data-model:1:1,data-post:1:1,data-session:1:1
+            value: "data-model:1:1,data-post:1:1,data-session:1:1,test:1:1"

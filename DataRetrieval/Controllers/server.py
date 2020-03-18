@@ -26,7 +26,7 @@ topics.append(NewTopic(name="data-post", num_partitions=1, replication_factor=1)
 topics.append(NewTopic(name="data-session", num_partitions=1, replication_factor=1))
 # admin = KafkaAdminClient(bootstrap_servers=['localhost:9092'])
 # producer = KafkaProducer(security_protocol='PLAINTEXT', bootstrap_servers=os.environ.get('KAFKA_HOST', 'localhost:9092'))
-producer = KafkaProducer(bootstrap_servers=['kafka:9092'])
+producer = KafkaProducer(bootstrap_servers=['kafka-service:9092'])
 
 # Check if topics already exist in kafka
     

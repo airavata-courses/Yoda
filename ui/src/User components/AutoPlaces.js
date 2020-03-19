@@ -47,10 +47,10 @@ export default function AutoPlaces() {
   async function sendSelected(payload) {
     let response = await axios.post("/gatewayserver/realtime", payload);
     console.log(response);
-    if (!response.data.data.forecast["detailedForecast"]){
-      console.log("undefined response");
-      // return(<h1>Real Time data not available currently. Please try again later.</h1>)
-    }else{
+    // if (!response.data.data.forecast["detailedForecast"]){
+    //   console.log("undefined response");
+    //   // return(<h1>Real Time data not available currently. Please try again later.</h1>)
+    // }else{
       var fore = response.data.data.forecast;
       var period = response.data.forecast.properties.periods;
     console.log(periods);
@@ -64,7 +64,7 @@ export default function AutoPlaces() {
     setFore(fore);
     setPeriods(period);
     setHidden(false);
-    }
+    // }
     
     console.log(fores);   
   }

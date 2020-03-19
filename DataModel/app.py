@@ -20,8 +20,12 @@ for messages in consumer:
     print("Message topic:", messages.topic)
     print("Message key:", messages.key)
     print("Message payload:", pickle.loads(messages.value))
+    values = pickle.loads(messages.value)
+    availData = conn.get_avail_scans(values['year'], values['month'], values['day'], values['radar'])
+    values['availData'] = availData[0]
+
     print('\n')
-    files = messages.value
+    files = pickle.dumps(values)
     # downloaded_data = conn.download(files, '/data')
     producer.send('data-post', key=b'foo', value=files)
     

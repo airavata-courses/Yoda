@@ -11,7 +11,7 @@ conn = nexradaws.NexradAwsInterface()
 # consumer = KafkaConsumer("data-model", auto_offset_reset='earliest', group_id='kafkagroupid', enable_auto_commit=True,
 # 						 bootstrap_servers=['localhost:9092'], api_version=(0, 10))
                          
-consumer = KafkaConsumer('data-model', bootstrap_servers=['kafka-service:9092'])
+consumer = KafkaConsumer('data-model', bootstrap_servers=['kafka-service:9092'], , group_id="datamodel")
 producer = KafkaProducer(bootstrap_servers=['kafka-service:9092'])
 print("Connected kafka consumer")
 

@@ -20,8 +20,6 @@ conn = nexradaws.NexradAwsInterface()
 
 consumer = KafkaConsumer("data-post", bootstrap_servers=['kafka-service:9092'], enable_auto_commit=True,
      group_id='post-process-group', auto_offset_reset='earliest')
-# , auto_offset_reset='earliest', group_id='kafkagroupid', enable_auto_commit=True,/
-						#  bootstrap_servers=['localhost:9092'], api_version=(0, 10))
                          
 producer = KafkaProducer(bootstrap_servers=['kafka-service:9092'])
 

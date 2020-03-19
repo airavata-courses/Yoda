@@ -8,6 +8,8 @@ COPY requirements.txt .
 
 RUN pip install --user -r requirements.txt
 
+MKDIR /app/images
+
 COPY . .
 
 CMD ["python", "app.py"]

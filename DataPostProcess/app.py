@@ -18,8 +18,7 @@ from nexradapi import payload_create
 
 conn = nexradaws.NexradAwsInterface()
 
-consumer = KafkaConsumer("data-post", bootstrap_servers=['kafka-service:9092'], enable_auto_commit=True,
-     group_id='post-process-group')
+consumer = KafkaConsumer("data-post", bootstrap_servers=['kafka-service:9092'], group_id="post_process")
                          
 producer = KafkaProducer(bootstrap_servers=['kafka-service:9092'])
 

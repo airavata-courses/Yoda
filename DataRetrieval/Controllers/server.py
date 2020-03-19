@@ -62,13 +62,13 @@ def dataRetrieve(radar, day, month, year, user_id):
             # print(int(session_id))
             print("Inside the data retrieval stub")
             print("Trying to get the avaiable scans from nexrad")
-            availData = conn.get_avail_scans(year, month, day, radar)
-            print("Available scans are:", availData)
+            # availData = conn.get_avail_scans(year, month, day, radar)
+            # print("Available scans are:", availData)
             session_id = str(uuid.uuid4())
             
             print("session_id:", session_id)
             payload = {}
-            payload['availData'] = availData[0]
+            # payload['availData'] = availData[0]
             payload['session_id'] = session_id
             payload['radar'] = radar
             payload['day'] = day

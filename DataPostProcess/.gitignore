@@ -7,6 +7,6 @@ __pycache__/
 
 data/*
 
-images/*
+# images/*
 
 test.py

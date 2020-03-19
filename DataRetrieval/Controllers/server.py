@@ -55,14 +55,14 @@ def test():
     To retrieve data from NEXRAD.
 '''
 @app.route('/dataretrieval/<string:radar>/<int:day>/<int:month>/<int:year>/<string:user_id>', methods=['GET', 'POST'])
-async def dataRetrieve(radar, day, month, year, user_id):
+def dataRetrieve(radar, day, month, year, user_id):
     # test()
     try:
         if request.method == 'GET':
             # print(int(session_id))
             print("Inside the data retrieval stub")
             print("Trying to get the avaiable scans from nexrad")
-            availData = await conn.get_avail_scans(year, month, day, radar)
+            availData = conn.get_avail_scans(year, month, day, radar)
             print("Available scans are:", availData)
             session_id = str(uuid.uuid4())
             

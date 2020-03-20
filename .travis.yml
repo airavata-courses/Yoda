@@ -1,7 +1,6 @@
 language: python:3.6
 before-install:
   - cd DataPostProcess
-  - echo "$TRAVIS_COMMIT"
   - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv 
     -in deploy_key.enc -out ./deploy_key -d
 install:

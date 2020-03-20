@@ -88,5 +88,4 @@ def dataRetrieve(radar, day, month, year, user_id):
 
 if __name__ == "__main__":
     app.secret_key = 'secret'
-    print("test 123")
     app.run(host='0.0.0.0', port=3300, debug=True)

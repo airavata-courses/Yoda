@@ -16,7 +16,6 @@ after-success:
   - docker push teamyoda/sessionmanagement:$TRAVIS_COMMIT
   - chmod 600 ../../deploy_key && ssh -o StrictHostKeyChecking=no -i ../../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/sessionDeployment.sh $TRAVIS_COMMIT"
   - echo "All process done successfully"
-
 branches:
   only:
     - SessionManagement

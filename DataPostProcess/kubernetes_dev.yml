@@ -33,6 +33,6 @@ spec:
       containers:
         - name: data-post-process-dev
           imagePullPolicy: Always
-          image: teamyoda/datapostprocess:latest
+          image: teamyoda/datapostprocess
           ports:
             - containerPort: 3800

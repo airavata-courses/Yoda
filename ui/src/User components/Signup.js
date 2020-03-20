@@ -66,7 +66,7 @@ class Signup extends Component {
     })
     .catch(err => {
       console.log(err.response);
-      return err.response.json();
+      return err.response;
     })
     // console.log(axiosResponse.data);
     // return axiosResponse.data;

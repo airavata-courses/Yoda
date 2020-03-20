@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
 import response from "./response";
+import Menu from "./Menu";
 
 class Signin extends Component {
   constructor() {
@@ -40,8 +41,8 @@ class Signin extends Component {
     // console.log(user);
     this.signin(user).then(data => {
       console.log(data);
-      if (data && data.error) {
-        this.setState({ error: data.error, loading: false });
+      if (data && data.data.error) {
+        this.setState({ error: data.data.error, loading: false });
       } else {
         this.setState({ errorMessage: "" });
         // authenticate user
@@ -55,9 +56,17 @@ class Signin extends Component {
   };
 
   async signin(user) {
-    let axiosRes = await axios.post("/user/signin", user);
-    console.log(axiosRes);
-    return axiosRes.data;
+    return await axios.post("/user/signin", user)
+    .then(response => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch(err => {
+      console.log(err.response);
+      return err.response;
+    })
+    // console.log(axiosRes);
+    // return axiosRes.data;
   }
 
   render() {
@@ -68,6 +77,8 @@ class Signin extends Component {
     }
 
     return (
+      <div>
+        <Menu />
       <div className="container">
         <h2 className="mt-5 mb-5">Login</h2>
 
@@ -123,6 +134,7 @@ class Signin extends Component {
             </Link>
           </div>
         </form>
+      </div>
       </div>
     );
   }

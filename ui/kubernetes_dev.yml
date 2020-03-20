@@ -32,6 +32,6 @@ spec:
       containers:
         - name: frontend-dev
           imagePullPolicy: Always
-          image: teamyoda/userinterface:latest
+          image: teamyoda/userinterface
           ports:
             - containerPort: 3000

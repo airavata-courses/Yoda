@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Menu from "./Menu";
 
 class Signup extends Component {
   constructor() {
@@ -29,9 +30,18 @@ class Signup extends Component {
     };
     //console.log(user);
     this.signup(user).then(data => {
+<<<<<<< HEAD
       if (data["error"]) {
         this.setState({ error: data["error"] });
+=======
+      console.log(data)
+      console.log(data.data.error);
+      if (data.data.error) {
+        console.log("in if")
+        this.setState({ error: data.data.error });
+>>>>>>> 6cadb90399ad90563ffda4184b1f6a9c13efdf22
       } else {
+        console.log("in else")
         this.setState({
           error: "",
           name: "",
@@ -57,16 +67,30 @@ class Signup extends Component {
     //     return response.json();
     //   })
     //   .catch(err => console.log(err));
-    let axiosResponse = await axios.post("/user/signup", user);
-    console.log(axiosResponse.data);
-    return axiosResponse.data;
+  
+    return await axios.post("/user/signup", user)
+    .then(response => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch(err => {
+      console.log(err.response);
+      return err.response;
+    })
+
+    // console.log(axiosResponse.data);
+    // return axiosResponse.data;
+    
   }
 
   render() {
     const { name, email, password, error, open } = this.state;
     return (
+      <div> 
+        <Menu />
+      
       <div className="container">
-        <h2 className="mt-5 mb-5">Signup</h2>
+        <h2 className="mt-5 mb-5">Signup.</h2>
 
         <div
           className="alert alert-primary"
@@ -117,6 +141,7 @@ class Signup extends Component {
             Submit
           </button>
         </form>
+      </div>
       </div>
     );
   }

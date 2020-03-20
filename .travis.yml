@@ -1,20 +1,24 @@
 language: node_js
 node_js: 10.16
 services:
-    - docker
+  - docker
 
 before-install:
-# - npm i -g npm@version-number
-    - cd ui
+  # - npm i -g npm@version-number
+  - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
+  - echo "Hi"
+  - cd ui
 install:
-    - npm install
-script: 
-    - echo "Hi from UserInterface"
+  - npm install
+script:
+  - echo "Hi from UserInterface"
 after-success:
-    - cd GatewayServer
-    - docker login -u $username -p $password
-    - docker build -t teamyoda/userinterface:latest .
-    - docker push teamyoda/userinterface:latest
+  - cd GatewayServer
+  - docker login -u $username -p $password
+  - docker build -t teamyoda/userinterface:$TRAVIS_COMMIT .
+  - docker push teamyoda/userinterface:$TRAVIS_COMMIT
+  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/frontendDeployment.sh $TRAVIS_COMMIT"
+  - echo "All process done successfully"
 branches:
-    only:
-        - UserInterface
+  only:
+    - UserInterface

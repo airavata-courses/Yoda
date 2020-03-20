@@ -27,7 +27,6 @@ topics.append(NewTopic(name="data-session", num_partitions=1, replication_factor
 # admin = KafkaAdminClient(bootstrap_servers=['localhost:9092'])
 # producer = KafkaProducer(security_protocol='PLAINTEXT', bootstrap_servers=os.environ.get('KAFKA_HOST', 'localhost:9092'))
 producer = KafkaProducer(bootstrap_servers=['kafka-service:9092'])
-print("Test print for travis CD")
 
 # Check if topics already exist in kafka
     

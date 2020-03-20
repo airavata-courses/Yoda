@@ -14,9 +14,9 @@ script:
 after-success:
   - cd GatewayServer
   - docker login -u $username -p $password
-  - docker build -t teamyoda/userinterface .
-  - docker push teamyoda/userinterface
-  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 '~/DeliveryFiles/frontendDeployment.sh'
+  - docker build -t teamyoda/userinterface:$TRAVIS_COMMIT .
+  - docker push teamyoda/userinterface:$TRAVIS_COMMIT
+  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/frontendDeployment.sh $TRAVIS_COMMIT"
   - echo "All process done successfully"
 branches:
   only:

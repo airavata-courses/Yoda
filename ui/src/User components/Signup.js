@@ -30,6 +30,7 @@ class Signup extends Component {
     //console.log(user);
     this.signup(user).then(data => {
       if (data["error"]) {
+        console.log(data);
         this.setState({ error: data["error"] });
       } else {
         this.setState({

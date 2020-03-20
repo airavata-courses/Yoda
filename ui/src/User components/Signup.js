@@ -59,19 +59,16 @@ class Signup extends Component {
     //   })
     //   .catch(err => console.log(err));
   
-    await axios.post("/user/signup", user)
-    // .then(response => {
-    //   console.log(response.data);
-    //   return response.data;
-    // })
-    // .catch(err => {
-    //   console.log(err.response);
-    //   return err.response;
-    // })
+    return await axios.post("/user/signup", user)
     .then(response => {
-          return response.json();
-        })
-        .catch(err => console.log(err));
+      console.log(response.data);
+      return response.data;
+    })
+    .catch(err => {
+      console.log(err.response);
+      return err.response;
+    })
+
     // console.log(axiosResponse.data);
     // return axiosResponse.data;
     

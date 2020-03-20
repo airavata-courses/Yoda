@@ -32,6 +32,6 @@ spec:
       containers:
         - name: realtime-dev
           imagePullPolicy: Always
-          image: teamyoda/realtime:latest
+          image: teamyoda/realtime
           ports:
             - containerPort: 3500

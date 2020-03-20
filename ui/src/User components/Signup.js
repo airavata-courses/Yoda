@@ -44,7 +44,7 @@ class Signup extends Component {
     });
   };
 
-  signup(user) {
+  async signup(user) {
     // return fetch("/user/signup", {
     //   method: "POST",
     //   headers: {
@@ -59,15 +59,15 @@ class Signup extends Component {
     //   })
     //   .catch(err => console.log(err));
   
-    axios.post("/user/signup", user)
-         .then(response => {
-            console.log(response.data);
-            return response.data;
-          })
-         .catch(err => {
-            console.log(err.response);
-            return err.response;
-          })
+    await axios.post("/user/signup", user)
+    .then(response => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch(err => {
+      console.log(err.response);
+      return err.response;
+    })
     // console.log(axiosResponse.data);
     // return axiosResponse.data;
     

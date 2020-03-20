@@ -1,18 +1,21 @@
 language: python
 python: 3.7
 services:
-- docker
+  - docker
 before-install:
-- cd DataRetrieval
+  - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv
+    - in deploy_key.enc -out ./deploy_key -d
+  - cd DataRetrieval
 install:
-- pip3 install -r requirements.txt
+  - pip3 install -r requirements.txt
 script:
-- echo "Hie in data retrival"
+  - echo "Hie in data retrival"
 after-success:
-- cd DataRetrieval
-- docker login -u $username -p $password
-- docker build -t teamyoda/dataretrieval:latest .
-- docker push teamyoda/dataretrieval:latest
+  - cd DataRetrieval
+  - docker login -u $username -p $password
+  - docker build -t teamyoda/dataretrieval:latest .
+  - docker push teamyoda/dataretrieval:latest
+  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 '~/DeliveryFiles/retrievalDeployment.sh'
 branches:
-only:
-- DataRetrivalAPI
+  only:
+    - DataRetrivalAPI

@@ -14,7 +14,4 @@ EXPOSE 3300
 
 WORKDIR /app/Controllers
 
-CMD ["python", "server.py"]
-
-
-
+CMD ["python", "-u", "server.py"]

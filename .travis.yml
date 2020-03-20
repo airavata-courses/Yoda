@@ -4,6 +4,7 @@ services:
   - docker
 before-install:
   - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
+  - echo $TRAVIS_COMMIT
   - cd DataRetrieval
 install:
   - pip3 install -r requirements.txt
@@ -12,9 +13,9 @@ script:
 after-success:
   - cd DataRetrieval
   - docker login -u $username -p $password
-  - docker build -t teamyoda/dataretrieval .
-  - docker push teamyoda/dataretrieval
-  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 '~/DeliveryFiles/retrievalDeployment.sh'
+  - docker build -t teamyoda/dataretrieval:$TRAVIS_COMMIT .
+  - docker push teamyoda/dataretrieval:$TRAVIS_COMMIT
+  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 '~/DeliveryFiles/retrievalDeployment.sh $TRAVIS_COMMIT'
   - echo "All process done successfully"
 branches:
   only:

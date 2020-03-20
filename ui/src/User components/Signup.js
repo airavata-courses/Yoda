@@ -31,7 +31,7 @@ class Signup extends Component {
     this.signup(user).then(data => {
       console.log(data)
       console.log(data.data.error);
-      if (data.data.error) {
+      if (data.data.error != null) {
         console.log("in if")
         this.setState({ error: data.data.error });
       } else {

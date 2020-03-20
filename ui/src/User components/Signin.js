@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
 import response from "./response";
+import Menu from "./Menu";
 
 class Signin extends Component {
   constructor() {
@@ -76,6 +77,8 @@ class Signin extends Component {
     }
 
     return (
+      <div>
+        <Menu />
       <div className="container">
         <h2 className="mt-5 mb-5">Login</h2>
 
@@ -131,6 +134,7 @@ class Signin extends Component {
             </Link>
           </div>
         </form>
+      </div>
       </div>
     );
   }

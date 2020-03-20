@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Menu from "./Menu";
 
 class Signup extends Component {
   constructor() {
@@ -80,6 +81,9 @@ class Signup extends Component {
   render() {
     const { name, email, password, error, open } = this.state;
     return (
+      <div> 
+        <Menu />
+      
       <div className="container">
         <h2 className="mt-5 mb-5">Signup</h2>
 
@@ -132,6 +136,7 @@ class Signup extends Component {
             Submit
           </button>
         </form>
+      </div>
       </div>
     );
   }

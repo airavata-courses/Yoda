@@ -17,9 +17,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.example.demo.Repository.ActivityDetailsRepository;
 import com.example.demo.Repository.SessionRepository;
-import com.example.demo.Service.UserService;
 import com.example.demo.model.SessionImage;
 import com.example.demo.model.Sessiondata;
+import com.example.demo.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

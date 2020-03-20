@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 class ResetPassword extends Component {
   constructor(props) {
     super(props);
@@ -28,21 +30,24 @@ class ResetPassword extends Component {
     });
   };
 
-  resetPassword = resetInfo => {
-    return fetch("http://localhost:3200/reset-password/", {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(resetInfo)
-    })
-      .then(response => {
-        console.log("forgot password response: ", response);
-        return response.json();
-      })
-      .catch(err => console.log(err));
-  };
+  async resetPassword(resetInfo) {
+    // return fetch("/user/reset-password/", {
+    //   method: "PUT",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(resetInfo)
+    // })
+    //   .then(response => {
+    //     console.log("forgot password response: ", response);
+    //     return response.json();
+    //   })
+    //   .catch(err => console.log(err));
+    let axiosResponse = await axios.put("/user/reset-password/", resetInfo);
+    console.log(axiosResponse.data);
+    return axiosResponse.data;
+  }
 
   render() {
     return (

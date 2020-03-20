@@ -1,6 +1,6 @@
 export const signup = user => {
   // Communicating with the backend on localhost:8080
-  return fetch(`${process.env.REACT_APP_API_URL}/signup`, {
+  return fetch(`/user/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -17,7 +17,7 @@ export const signup = user => {
 export const signin = user => {
   // Communicating with the backend on localhost:8080
   // console.log(process.env.REACT_APP_API_URL);
-  return fetch(`${process.env.REACT_APP_API_URL}/signin`, {
+  return fetch(`/user/signin`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -43,7 +43,7 @@ export const signout = next => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("jwt");
     next();
-    return fetch(`${process.env.REACT_APP_API_URL}/signout`, {
+    return fetch(`/user/signout`, {
       method: "GET"
     })
       .then(response => {
@@ -70,7 +70,7 @@ export const isAuthenticated = () => {
 
 export const forgotPassword = email => {
   console.log("email: ", email);
-  return fetch(`${process.env.REACT_APP_API_URL}/forgot-password/`, {
+  return fetch(`/user/forgot-password/`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -86,7 +86,7 @@ export const forgotPassword = email => {
 };
 
 export const resetPassword = resetInfo => {
-  return fetch(`${process.env.REACT_APP_API_URL}/reset-password/`, {
+  return fetch(`/user/reset-password/`, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -102,7 +102,7 @@ export const resetPassword = resetInfo => {
 };
 
 export const socialLogin = user => {
-  return fetch(`${process.env.REACT_APP_API_URL}/social-login/`, {
+  return fetch(`/user/social-login/`, {
     method: "POST",
     headers: {
       Accept: "application/json",

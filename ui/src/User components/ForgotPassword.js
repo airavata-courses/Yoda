@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class ForgotPassword extends Component {
   state = {
@@ -21,22 +22,25 @@ class ForgotPassword extends Component {
     });
   };
 
-  forgotPassword1 = email => {
+  async forgotPassword1(email) {
     console.log("email: ", email);
-    return fetch("http://localhost:3200/forgot-password/", {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email })
-    })
-      .then(response => {
-        console.log("forgot password response: ", response);
-        return response.json();
-      })
-      .catch(err => console.log(err));
-  };
+    // return fetch("/user/forgot-password/", {
+    //   method: "PUT",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify({ email })
+    // })
+    //   .then(response => {
+    //     console.log("forgot password response: ", response);
+    //     return response.json();
+    //   })
+    //   .catch(err => console.log(err));
+    let axiosResponse = await axios.put("/user/forgot-password", email);
+    console.log(axiosResponse.data);
+    return axiosResponse.data;
+  }
 
   render() {
     return (

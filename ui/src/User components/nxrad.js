@@ -44,10 +44,7 @@ class nexrad extends Component {
   };
 
   async sendSelected(requested) {
-    let response = await axios.post(
-      "http://localhost:3100/retrievedata",
-      requested
-    );
+    let response = await axios.post("/gatewayserver/retrievedata", requested);
     this.setState({ session_id: response.data });
     console.log(response.data);
     return response.data;

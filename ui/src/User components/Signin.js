@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
+import axios from "axios";
+import response from "./response";
+import Menu from "./Menu";
 
 class Signin extends Component {
   constructor() {
@@ -37,9 +40,10 @@ class Signin extends Component {
     };
     // console.log(user);
     this.signin(user).then(data => {
-      if (data && data.error) {
-        this.setState({ error: data.error, loading: false });
-      } else {
+      console.log(data);
+      if (data && data.data!=null && data.data.error!=null) {
+        this.setState({ error: data.data.error, loading: false });
+      } else if(data && data.token!=null) {
         this.setState({ errorMessage: "" });
         // authenticate user
         this.authenticate(data, () => {
@@ -51,21 +55,19 @@ class Signin extends Component {
     });
   };
 
-  signin = user => {
-    return fetch("http://localhost:3200/signin", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3200"
-      },
-      body: JSON.stringify(user)
+  async signin(user) {
+    return await axios.post("/user/signin", user)
+    .then(response => {
+      console.log(response.data);
+      return response.data;
     })
-      .then(response => {
-        return response.json();
-      })
-      .catch(err => console.log(err));
-  };
+    .catch(err => {
+      console.log(err.response);
+      return err.response;
+    })
+    // console.log(axiosRes);
+    // return axiosRes.data;
+  }
 
   render() {
     const { email, password, error, redirectToReferer, loading } = this.state;
@@ -75,6 +77,8 @@ class Signin extends Component {
     }
 
     return (
+      <div>
+        <Menu />
       <div className="container">
         <h2 className="mt-5 mb-5">Login</h2>
 
@@ -130,6 +134,7 @@ class Signin extends Component {
             </Link>
           </div>
         </form>
+      </div>
       </div>
     );
   }

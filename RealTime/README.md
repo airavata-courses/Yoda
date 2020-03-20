@@ -1,25 +1,8 @@
-# Weather Forecasting System
+## Real time data fetch microservice
 
+## Instantiate a new python virtual environment and then activate the venv
 
--  [ Collaborators. ](#Collaborators)
--  [ About App. ](#AboutApp)
--  [ Getting Started. ](#GettingStarted)
--  [ Running each module. ](#Runningeachmodule)
+### After doing the above step then install the dependencies from the requirements.txt using pip install -r requirements.txt
 
-
-
-<a name="Collaborators"></a>
-### Collaborators
-- Gopal Goutham
-- Shruti Desai
-- Tanvi Thote
-
-<a name="AboutApp"></a>
-### About App
-
-Upload Image
-
-<a name="GettingStarted"></a>
-### Getting Started
-
-For getting started with setting up the system and firing up the Weather Dashboard go to [WIKI](https://github.com/airavata-courses/Yoda/wiki/Release-Notes---Assignment-1)
+### Move to Controllers folder and start server - python server.py
+> Server will be running in port 3400.

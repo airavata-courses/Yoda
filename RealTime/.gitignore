@@ -1,1 +1,6 @@
-.idea/
+# Ignoring all virtual env files in env folder
+env/
+
+# Ignoring all pycache files
+__pycache__/
+*.pyc

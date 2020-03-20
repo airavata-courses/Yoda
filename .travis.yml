@@ -19,4 +19,4 @@ after-success:
 
 branches:
   only:
-    - SessionManagementAPI
+    - SessionManagement

@@ -30,8 +30,8 @@ class Signup extends Component {
     //console.log(user);
     this.signup(user).then(data => {
       console.log(data);
-      if (data["error"]) {
-        this.setState({ error: data["error"] });
+      if (data.error) {
+        this.setState({ error: data.error });
       } else {
         this.setState({
           error: "",
@@ -60,14 +60,18 @@ class Signup extends Component {
     //   .catch(err => console.log(err));
   
     await axios.post("/user/signup", user)
+    // .then(response => {
+    //   console.log(response.data);
+    //   return response.data;
+    // })
+    // .catch(err => {
+    //   console.log(err.response);
+    //   return err.response;
+    // })
     .then(response => {
-      console.log(response.data);
-      return response.data;
-    })
-    .catch(err => {
-      console.log(err.response);
-      return err.response;
-    })
+          return response.json();
+        })
+        .catch(err => console.log(err));
     // console.log(axiosResponse.data);
     // return axiosResponse.data;
     

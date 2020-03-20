@@ -1,0 +1,38 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: session-dev
+spec:
+  type: NodePort
+  selector:
+    app: session-dev
+  ports:
+    - protocol: TCP
+      port: 3400
+      targetPort: 3400
+      nodePort: 30400
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: session-dev
+  labels:
+    app: session-dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: session-dev
+  template:
+    metadata:
+      labels:
+        app: session-dev
+    spec:
+      containers:
+        - name: session-dev
+          imagePullPolicy: Always
+          image: teamyoda/sessionmanagement
+          ports:
+            - containerPort: 3400

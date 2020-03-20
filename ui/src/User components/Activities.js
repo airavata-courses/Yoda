@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/index";
+import axios from "axios";
 
 class Activities extends Component {
   constructor() {
@@ -15,24 +16,30 @@ class Activities extends Component {
     this.setState({ activities: this.fetchActivities(userId) });
   }
 
-  fetchActivities = userId => {
-    fetch("http://localhost:3100/retrieveactivities", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3100"
-      },
-      body: JSON.stringify(userId)
-    })
-      .then(response => {
-        console.log(response.json());
-      })
-      .then(data => {
-        this.setState({ activities: data });
-      })
-      .catch(err => console.log(err));
-  };
+  async fetchActivities(userId) {
+    // fetch("/gatewayserver/retrieveactivities", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //     "Access-Control-Allow-Origin": "http://localhost:3100"
+    //   },
+    //   body: JSON.stringify(userId)
+    // })
+    //   .then(response => {
+    //     console.log(response.json());
+    //   })
+    //   .then(data => {
+    //     this.setState({ activities: data });
+    //   })
+    //   .catch(err => console.log(err));
+    let axiosResponse = await axios.post(
+      "/gatewayserver/retrieveactivities",
+      userId
+    );
+    console.log(axiosResponse.data);
+    return axiosResponse.data;
+  }
 
   renderActivities = activities => {
     return (

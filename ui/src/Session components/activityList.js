@@ -13,7 +13,7 @@ class ActivityList extends React.Component {
 
   async fetchUsers(payload) {
     let response = await axios.post(
-      "http://localhost:3100/retrieveactivities",
+      "/gatewayserver/retrieveactivities",
       payload
     );
     console.log(response.data);

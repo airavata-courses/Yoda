@@ -4,9 +4,3 @@ env/
 # Ignoring all pycache files
 __pycache__/
 *.pyc
-
-data/*
-
-# images/*
-
-test.py

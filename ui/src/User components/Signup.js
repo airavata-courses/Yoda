@@ -60,7 +60,7 @@ class Signup extends Component {
   
     let axiosResponse = await axios.post("/user/signup", user)
     .then(response => {return response.data})
-    .catch(err => {console.log(err.response)})
+    .catch(err => {return err.response})
     // console.log(axiosResponse.data);
     // return axiosResponse.data;
     

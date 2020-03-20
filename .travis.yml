@@ -2,14 +2,21 @@ language: java
 jdk: openjdk8
 java: 8
 services:
-- docker
-
+  - docker
+before-install:
+  - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
 before-script:
-- cd Session/KafkaConsumer
+  - cd Session/KafkaConsumer
 install: true
 script:
-- mvn clean install
+  - mvn clean install
 after-success:
-- docker login -u $username -p $password
-- docker build -t teamyoda/sessionmanagement:latest .
-- docker push teamyoda/sessionmanagement:latest
+  - docker login -u $username -p $password
+  - docker build -t teamyoda/sessionmanagement:$TRAVIS_COMMIT .
+  - docker push teamyoda/sessionmanagement:$TRAVIS_COMMIT
+  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/userDeployment.sh $TRAVIS_COMMIT"
+  - echo "All process done successfully"
+
+branches:
+  only:
+    - SessionManagementAPI

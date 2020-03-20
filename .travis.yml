@@ -10,6 +10,7 @@ before-script:
 install: true
 script:
   - mvn clean install
+  - mvn test
 after-success:
   - docker login -u $username -p $password
   - docker build -t teamyoda/sessionmanagement:$TRAVIS_COMMIT .

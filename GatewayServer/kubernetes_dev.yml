@@ -33,6 +33,6 @@ spec:
       containers:
         - name: gatewayserver
           imagePullPolicy: Always
-          image: teamyoda/gatewayserver:latest
+          image: teamyoda/gatewayserver
           ports:
             - containerPort: 3100

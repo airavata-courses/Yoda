@@ -29,11 +29,13 @@ class Signup extends Component {
     };
     //console.log(user);
     this.signup(user).then(data => {
-      // console.log(data);
+      console.log(data)
+      console.log(data.error);
       if (data.error) {
-        console.log(data.error)
+        console.log("in if")
         this.setState({ error: data.error });
       } else {
+        console.log("in else")
         this.setState({
           error: "",
           name: "",

@@ -90,7 +90,7 @@ class Signup extends Component {
         <Menu />
       
       <div className="container">
-        <h2 className="mt-5 mb-5">Signup.</h2>
+        <h2 className="mt-5 mb-5">Signup</h2>
 
         <div
           className="alert alert-primary"

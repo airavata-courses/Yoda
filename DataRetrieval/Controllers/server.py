@@ -27,6 +27,7 @@ topics.append(NewTopic(name="data-session", num_partitions=1, replication_factor
 # admin = KafkaAdminClient(bootstrap_servers=['localhost:9092'])
 # producer = KafkaProducer(security_protocol='PLAINTEXT', bootstrap_servers=os.environ.get('KAFKA_HOST', 'localhost:9092'))
 producer = KafkaProducer(bootstrap_servers=['kafka-service:9092'])
+print("Test print for travis CD")
 
 # Check if topics already exist in kafka
     
@@ -61,7 +62,7 @@ def dataRetrieve(radar, day, month, year, user_id):
         if request.method == 'GET':
             # print(int(session_id))
             print("Inside the data retrieval stub")
-            print("Trying to get the avaiable scans from nexrad")
+            # print("Trying to get the avaiable scans from nexrad")
             # availData = conn.get_avail_scans(year, month, day, radar)
             # print("Available scans are:", availData)
             session_id = str(uuid.uuid4())

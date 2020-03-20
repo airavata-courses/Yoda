@@ -40,8 +40,8 @@ class Signin extends Component {
     // console.log(user);
     this.signin(user).then(data => {
       console.log(data);
-      if (data && data.error) {
-        this.setState({ error: data.error, loading: false });
+      if (data && data.data.error) {
+        this.setState({ error: data.data.error, loading: false });
       } else {
         this.setState({ errorMessage: "" });
         // authenticate user
@@ -55,9 +55,17 @@ class Signin extends Component {
   };
 
   async signin(user) {
-    let axiosRes = await axios.post("/user/signin", user);
-    console.log(axiosRes);
-    return axiosRes.data;
+    return await axios.post("/user/signin", user)
+    .then(response => {
+      console.log(response.data);
+      return response.data;
+    })
+    .catch(err => {
+      console.log(err.response);
+      return err.response;
+    })
+    // console.log(axiosRes);
+    // return axiosRes.data;
   }
 
   render() {

@@ -30,11 +30,16 @@ class Signup extends Component {
     };
     //console.log(user);
     this.signup(user).then(data => {
+<<<<<<< HEAD
+      if (data["error"]) {
+        this.setState({ error: data["error"] });
+=======
       console.log(data)
       console.log(data.data.error);
       if (data.data.error) {
         console.log("in if")
         this.setState({ error: data.data.error });
+>>>>>>> 6cadb90399ad90563ffda4184b1f6a9c13efdf22
       } else {
         console.log("in else")
         this.setState({
@@ -85,7 +90,7 @@ class Signup extends Component {
         <Menu />
       
       <div className="container">
-        <h2 className="mt-5 mb-5">Signup.</h2>
+        <h2 className="mt-5 mb-5">Signup</h2>
 
         <div
           className="alert alert-primary"

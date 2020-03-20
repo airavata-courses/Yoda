@@ -1,18 +1,22 @@
 language: python
 python: 3.7
 services:
-- docker
+  - docker
 before-install:
-- cd DataModel
+  - cd DataModel
+  - echo $TRAVIS_COMMIT
+  - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
 install:
-- pip3 install -r requirements.txt
+  - pip3 install -r requirements.txt
 script:
-- echo "Hi from model process"
+  - echo "Hi from model process"
 after-success:
-- cd DataModel
-- docker login -u $username -p $password
-- docker build -t teamyoda/datamodel:latest .
-- docker push teamyoda/datamodel:latest
+  - cd DataModel
+  - docker login -u $username -p $password
+  - docker build -t teamyoda/datamodel:$TRAVIS_COMMIT .
+  - docker push teamyoda/datamodel:$TRAVIS_COMMIT
+  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 '~/DeliveryFiles/dataModelDeployment.sh $TRAVIS_COMMIT'
+  - echo "All process done successfully"
 branches:
 only:
-- DataModelAPI
+  - DataModelAPI

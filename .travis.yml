@@ -1,20 +1,22 @@
 language: node_js
 node_js: 10.16
 services:
-    - docker
+  - docker
 
 before-install:
-# - npm i -g npm@version-number
-    - cd ui
+  # - npm i -g npm@version-number
+  - cd ui
 install:
-    - npm install
-script: 
-    - echo "Hi from UserInterface"
+  - npm install
+script:
+  - echo "Hi from UserInterface"
 after-success:
-    - cd GatewayServer
-    - docker login -u $username -p $password
-    - docker build -t teamyoda/userinterface:latest .
-    - docker push teamyoda/userinterface:latest
+  - cd GatewayServer
+  - docker login -u $username -p $password
+  - docker build -t teamyoda/userinterface:latest .
+  - docker push teamyoda/userinterface:latest
+  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 '~/DeliveryFiles/frontendDeployment.sh'
+  - echo "All process done successfully"
 branches:
-    only:
-        - UserInterface
+  only:
+    - UserInterface

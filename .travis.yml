@@ -12,8 +12,8 @@ script:
 after-success:
   - cd DataRetrieval
   - docker login -u $username -p $password
-  - docker build -t teamyoda/dataretrieval:latest .
-  - docker push teamyoda/dataretrieval:latest
+  - docker build -t teamyoda/dataretrieval .
+  - docker push teamyoda/dataretrieval
   - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 '~/DeliveryFiles/retrievalDeployment.sh'
   - echo "All process done successfully"
 branches:

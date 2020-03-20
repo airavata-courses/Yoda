@@ -33,6 +33,6 @@ spec:
       containers:
         - name: data-retrieval-dev
           # imagePullPolicy: Always
-          image: teamyoda/dataretrieval:latest
+          image: teamyoda/dataretrieval
           ports:
             - containerPort: 3300

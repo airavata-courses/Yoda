@@ -1,0 +1,24 @@
+language: java
+jdk: openjdk8
+java: 8
+services:
+- docker
+before-script:
+- cd Session/KafkaConsumer
+
+install: true
+script:
+- mvn clean install
+
+after-success:
+- docker login -u $username -p $password
+- docker build -t teamyoda/sessionmanagement:latest .
+- docker push teamyoda/sessionmanagement:latest
+
+
+- git config --global user.email $GITHUB_EMAIL
+- git config --global user.name $GITHUB_USER
+- git checkout -b Rel_SessionManagement
+- git commit --message "Travis build"
+- git remote add SessionManagementAPI https://${GITHUB_TOKEN}@github.com/airavata-courses/Yoda.git > /dev/null 2>&1
+- git push --quiet --set-upstream SessionManagementAPI Rel_SessionManagement

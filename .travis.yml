@@ -1,174 +1,177 @@
 matrix:
     include:
+
       # DataModel
       - language: python
-          python: 3.7
-          services:
-            - docker
-          before-install:
-            - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
-            - cd DataModel
-            - echo $TRAVIS_COMMIT
-          install:
-            - pip3 install -r requirements.txt
-          script:
-            - echo "Hi from model process"
-          after-success:
-            - cd DataModel
-            - docker login -u $username -p $password
-            - docker build -t teamyoda/datamodel:$TRAVIS_COMMIT .
-            - docker push teamyoda/datamodel:$TRAVIS_COMMIT
-            - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/dataModelDeployment.sh $TRAVIS_COMMIT"
-            - echo "All process done successfully"
+        python: 3.7
+        services:
+          - docker
+        before-install:
+          - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
+          - cd DataModel
+          - echo $TRAVIS_COMMIT
+        install:
+          - pip3 install -r requirements.txt
+        script:
+          - echo "Hi from model process"
+        after-success:
+          - cd DataModel
+          - docker login -u $username -p $password
+          - docker build -t teamyoda/datamodel:$TRAVIS_COMMIT .
+          - docker push teamyoda/datamodel:$TRAVIS_COMMIT
+          - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/dataModelDeployment.sh $TRAVIS_COMMIT"
+          - echo "All process done successfully"
           
 
       # DataPostProcessor
-      - language: python:3.6
-          before-install:
-            - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
-            - echo "all okay"
-            - cd DataPostProcess
-          install:
-            - pip3 install -r requirements.txt
-          script:
-            - echo "Hi from Post process"
-          after-success:
-            - docker login -u $username -p $password
-            - echo $TRAVIS_BUILD_NUMBER
-            - docker build -t teamyoda/datapostprocess:$TRAVIS_COMMIT .
-            - docker push teamyoda/datapostprocess:$TRAVIS_COMMIT
-            - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/dataPostProcessDeployment.sh $TRAVIS_COMMIT"
-            - echo "All process done successfully"
+      - language: python
+        python: 3.6
+        before-install:
+          - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
+          - echo "all okay"
+          - cd DataPostProcess
+        install:
+          - pip3 install -r requirements.txt
+        script:
+          - echo "Hi from Post process"
+        after-success:
+          - docker login -u $username -p $password
+          - echo $TRAVIS_BUILD_NUMBER
+          - docker build -t teamyoda/datapostprocess:$TRAVIS_COMMIT .
+          - docker push teamyoda/datapostprocess:$TRAVIS_COMMIT
+          - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/dataPostProcessDeployment.sh $TRAVIS_COMMIT"
+          - echo "All process done successfully"
           
 
       # DataRetrieval
       - language: python
-          python: 3.7
-          services:
-            - docker
-          before-install:
-            - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
-            - echo $TRAVIS_COMMIT
-            - cd DataRetrieval
-          install:
-            - pip3 install -r requirements.txt
-          script:
-            - echo "Hie in data retrival"
-          after-success:
-            - cd DataRetrieval
-            - docker login -u $username -p $password
-            - docker build -t teamyoda/dataretrieval:$TRAVIS_COMMIT .
-            - docker push teamyoda/dataretrieval:$TRAVIS_COMMIT
-            - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/retrievalDeployment.sh $TRAVIS_COMMIT"
-            - echo "All process done successfully"
+        python: 3.7
+        services:
+          - docker
+        before-install:
+          - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
+          - echo $TRAVIS_COMMIT
+          - cd DataRetrieval
+        install:
+          - pip3 install -r requirements.txt
+        script:
+          - echo "Hie in data retrival"
+        after-success:
+          - cd DataRetrieval
+          - docker login -u $username -p $password
+          - docker build -t teamyoda/dataretrieval:$TRAVIS_COMMIT .
+          - docker push teamyoda/dataretrieval:$TRAVIS_COMMIT
+          - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/retrievalDeployment.sh $TRAVIS_COMMIT"
+          - echo "All process done successfully"
           
 
   
       # GatewayServer
       - language: node_js
-          node_js: 10.16
-          services:
-            - docker
+        node_js: 10.16
+        services:
+          - docker
 
-          before-install:
-            - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
-            - cd GatewayServer
-          install:
-            - npm install
-          script:
-            - npm run test
-            - echo "hi"
-          after-success:
-            - cd GatewayServer
-            - docker login -u $username -p $password
-            - docker build -t teamyoda/gatewayserver:$TRAVIS_COMMIT .
-            - docker push teamyoda/gatewayserver:$TRAVIS_COMMIT
-            - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/gatewayServerDeployment.sh $TRAVIS_COMMIT"
-            - echo "All process done successfully"
+        before-install:
+          - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
+          - cd GatewayServer
+        install:
+          - npm install
+        script:
+          - npm run test
+          - echo "hi"
+        after-success:
+          - cd GatewayServer
+          - docker login -u $username -p $password
+          - docker build -t teamyoda/gatewayserver:$TRAVIS_COMMIT .
+          - docker push teamyoda/gatewayserver:$TRAVIS_COMMIT
+          - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/gatewayServerDeployment.sh $TRAVIS_COMMIT"
+          - echo "All process done successfully"
           
 
       #RealTime
-      - language: python:3.6
-          before-install:
-            - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
-            - cd RealTime
-            - echo $TRAVIS_COMMIT
-          install:
-            - pip3 install -r requirements.txt
-          script:
-            - echo "Hi from Real Time"
-          after-success: 
-            - docker login -u $username -p $password
-            - docker build -t teamyoda/realtime:$TRAVIS_COMMIT .
-            - docker push teamyoda/realtime:$TRAVIS_COMMIT
-            - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/realTimeDeployment.sh $TRAVIS_COMMIT"
-            - echo "All process done successfully"
+      - language: python
+        python: 3.6
+        before-install:
+          - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
+          - cd RealTime
+          - echo $TRAVIS_COMMIT
+        install:
+          - pip3 install -r requirements.txt
+        script:
+          - echo "Hi from Real Time"
+        after-success: 
+          - docker login -u $username -p $password
+          - docker build -t teamyoda/realtime:$TRAVIS_COMMIT .
+          - docker push teamyoda/realtime:$TRAVIS_COMMIT
+          - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/realTimeDeployment.sh $TRAVIS_COMMIT"
+          - echo "All process done successfully"
           
 
       # User
       - language: node_js
-          node_js: 10.16
-          services:
-            - docker
-          before-install:
-            - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
-            - cd User
-          install:
-            - npm install
-          script:
-            - npm run test
-          after-success:
-            - cd User
-            - docker login -u $username -p $password
-            - docker build -t teamyoda/userapi:$TRAVIS_COMMIT .
-            - docker push teamyoda/userapi:$TRAVIS_COMMIT
-            - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/userDeployment.sh $TRAVIS_COMMIT"
-            - echo "All process done successfully"
+        node_js: 10.16
+        services:
+          - docker
+        before-install:
+          - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
+          - cd User
+        install:
+          - npm install
+        script:
+          - npm run test
+        after-success:
+          - cd User
+          - docker login -u $username -p $password
+          - docker build -t teamyoda/userapi:$TRAVIS_COMMIT .
+          - docker push teamyoda/userapi:$TRAVIS_COMMIT
+          - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/userDeployment.sh $TRAVIS_COMMIT"
+          - echo "All process done successfully"
           
 
       # UserInterface
-        - language: node_js
-            node_js: 10.16
-            services:
-              - docker
+      - language: node_js
+        node_js: 10.16
+        services:
+          - docker
 
-            before-install:
-              # - npm i -g npm@version-number
-              - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
-              - echo "H"
-              - cd ui
-            install:
-              - npm install
-            script:
-              - echo "Hi from UserInterface"
-            after-success:
-              - cd GatewayServer
-              - docker login -u $username -p $password
-              - docker build -t teamyoda/userinterface:$TRAVIS_COMMIT .
-              - docker push teamyoda/userinterface:$TRAVIS_COMMIT
-              - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/frontendDeployment.sh $TRAVIS_COMMIT"
-              - echo "All process done successfully"
+        before-install:
+          # - npm i -g npm@version-number
+          - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
+          - echo "H"
+          - cd ui
+        install:
+          - npm install
+        script:
+          - echo "Hi from UserInterface"
+        after-success:
+          - cd GatewayServer
+          - docker login -u $username -p $password
+          - docker build -t teamyoda/userinterface:$TRAVIS_COMMIT .
+          - docker push teamyoda/userinterface:$TRAVIS_COMMIT
+          - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/frontendDeployment.sh $TRAVIS_COMMIT"
+          - echo "All process done successfully"
             
 
       # Session
-        - language: java
-            jdk: openjdk8
-            java: 8
-            services:
-              - docker
-            before-install:
-              - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
-            before-script:
-              - cd Session/KafkaConsumer
-            install: true
-            script:
-              - mvn clean install
-            after-success:
-              - docker login -u $username -p $password
-              - docker build -t teamyoda/sessionmanagement:$TRAVIS_COMMIT .
-              - docker push teamyoda/sessionmanagement:$TRAVIS_COMMIT
-              - chmod 600 ../../deploy_key && ssh -o StrictHostKeyChecking=no -i ../../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/sessionDeployment.sh $TRAVIS_COMMIT"
-              - echo "All process done successfully"
+      - language: java
+        jdk: openjdk8
+        java: 8
+        services:
+          - docker
+        before-install:
+          - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
+        before-script:
+          - cd Session/KafkaConsumer
+        install: true
+        script:
+          - mvn clean install
+        after-success:
+          - docker login -u $username -p $password
+          - docker build -t teamyoda/sessionmanagement:$TRAVIS_COMMIT .
+          - docker push teamyoda/sessionmanagement:$TRAVIS_COMMIT
+          - chmod 600 ../../deploy_key && ssh -o StrictHostKeyChecking=no -i ../../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/sessionDeployment.sh $TRAVIS_COMMIT"
+          - echo "All process done successfully"
 branches:
     only:
         - DevelopementNew            

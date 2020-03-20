@@ -1,19 +1,21 @@
 language: node_js
 node_js: 10.16
 services:
-- docker
+  - docker
 before-install:
-# - npm i -g npm@version-number
-- cd User
+  - openssl aes-256-cbc -K $encrypted_dfdcfd5172af_key -iv $encrypted_dfdcfd5172af_iv -in deploy_key.enc -out ./deploy_key -d
+  - cd User
 install:
-- npm install
-script: 
-- npm run test
+  - npm install
+script:
+  - npm run test
 after-success:
-- cd User
-- docker login -u $username -p $password
-- docker build -t teamyoda/userapi:latest .
-- docker push teamyoda/userapi:latest
+  - cd User
+  - docker login -u $username -p $password
+  - docker build -t teamyoda/userapi:$TRAVIS_COMMIT .
+  - docker push teamyoda/userapi:$TRAVIS_COMMIT
+  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/dataPostProcessDeployment.sh $TRAVIS_COMMIT"
+  - echo "All process done successfully"
 branches:
 only:
-- UserAPI
+  - UserAPI

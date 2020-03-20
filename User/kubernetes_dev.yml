@@ -32,6 +32,6 @@ spec:
       containers:
         - name: user
           imagePullPolicy: Always
-          image: teamyoda/userapi:latest
+          image: teamyoda/userapi
           ports:
             - containerPort: 3200

@@ -47,26 +47,26 @@ export default function AutoPlaces() {
   async function sendSelected(payload) {
     let response = await axios.post("/gatewayserver/realtime", payload);
     console.log(response);
-    if (!response.data.data.forecast["detailedForecast"]){
-      console.log("undefined response");
-      // return(<h1>Real Time data not available currently. Please try again later.</h1>)
-    }else{
-    var fore = response.data.data.forecast;
+    // if (!response.data.data.forecast["detailedForecast"]){
+    //   console.log("undefined response");
+    //   // return(<h1>Real Time data not available currently. Please try again later.</h1>)
+    // }else{
+    // var fore = response.data.data.forecast;
     var period = response.data.forecast.properties.periods;
     console.log(periods);
-    setForecast(fore["detailedForecast"]);
-    setshortForecast(fore["shortForecast"]);
-    settemperature(fore["temperature"]);
-    settemperatureUnit(fore["temperatureUnit"]);
-    setwindDirection(fore["windDirection"]);
-    setwindSpeed(fore["windSpeed"]);
-    seticon(fore["icon"]);
-    setFore(fore);
+    // setForecast(fore["detailedForecast"]);
+    // setshortForecast(fore["shortForecast"]);
+    // settemperature(fore["temperature"]);
+    // settemperatureUnit(fore["temperatureUnit"]);
+    // setwindDirection(fore["windDirection"]);
+    // setwindSpeed(fore["windSpeed"]);
+    // seticon(fore["icon"]);
+    // setFore(fore);
     setPeriods(period);
     setHidden(false);
-    }
+    // }
     
-    console.log(fores);   
+    // console.log(fores);   
   }
 
   return (
@@ -112,7 +112,7 @@ export default function AutoPlaces() {
       {/* <h1>detailed forecast: {detailedForecast}</h1> */}
       {!hidden ? 
       <div>
-      <Forecast detailedForecast={detailedForecast} shortForecast={shortForecast} temperature={temperature} temperatureUnit={temperatureUnit} windDirection={windDirection} windSpeed={windSpeed} icon={icon} />
+      {/* <Forecast detailedForecast={detailedForecast} shortForecast={shortForecast} temperature={temperature} temperatureUnit={temperatureUnit} windDirection={windDirection} windSpeed={windSpeed} icon={icon} /> */}
       <p></p> 
       <h1>Weekly Forecast</h1> 
       <Forecast detailedForecast={periods[1]["detailedForecast"]} shortForecast={periods[1]["shortForecast"]} temperature={periods[1]["temperature"]} temperatureUnit={periods[1]["temperatureUnit"]} windDirection={periods[1]["windDirection"]} windSpeed={periods[1]["windSpeed"]} icon={periods[1]["icon"]} />

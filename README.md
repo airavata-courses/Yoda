@@ -7,4 +7,7 @@
 - Shruti Desai
 - Tanvi Thote
 
-### Checkout our [Wiki](https://github.com/airavata-courses/Yoda/wiki/Release-Notes---Assignment-1) for more details on how to clone and contribute to out repo!
+### Checkout our [Wiki](https://github.com/airavata-courses/Yoda/wiki) for more details on how to clone and contribute to out repo!
+[Assignment1](https://github.com/airavata-courses/Yoda/wiki/Release-Notes---Assignment-1)
+[Assignment2](https://github.com/airavata-courses/Yoda/wiki/Release-Notes---Assignment-2)
+

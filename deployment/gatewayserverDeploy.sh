@@ -1,4 +1,4 @@
-kubectl appply -f https://raw.githubusercontent.com/airavata-courses/Yoda/Kafka/Kafka/zookeeper.yml
+kubectl apply -f https://raw.githubusercontent.com/airavata-courses/Yoda/Kafka/Kafka/zookeeper.yml
 kubectl apply -f https://raw.githubusercontent.com/airavata-courses/Yoda/Kafka/Kafka/kafka-deploy.yml
 kubectl apply -f https://raw.githubusercontent.com/airavata-courses/Yoda/Kafka/Kafka/kafka-service.yml
 kubectl apply -f https://raw.githubusercontent.com/airavata-courses/Yoda/GatewayServerAPI/GatewayServer/kubernetes_dev.yml

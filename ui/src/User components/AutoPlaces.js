@@ -47,26 +47,26 @@ export default function AutoPlaces() {
   async function sendSelected(payload) {
     let response = await axios.post("/gatewayserver/realtime", payload);
     console.log(response);
-    if (!response.data.data.forecast["detailedForecast"]){
-      console.log("undefined response");
-      // return(<h1>Real Time data not available currently. Please try again later.</h1>)
-    }else{
-    var fore = response.data.data.forecast;
+    // if (!response.data.data.forecast["detailedForecast"]){
+    //   console.log("undefined response");
+    //   // return(<h1>Real Time data not available currently. Please try again later.</h1>)
+    // }else{
+    // var fore = response.data.data.forecast;
     var period = response.data.forecast.properties.periods;
     console.log(periods);
-    setForecast(fore["detailedForecast"]);
-    setshortForecast(fore["shortForecast"]);
-    settemperature(fore["temperature"]);
-    settemperatureUnit(fore["temperatureUnit"]);
-    setwindDirection(fore["windDirection"]);
-    setwindSpeed(fore["windSpeed"]);
-    seticon(fore["icon"]);
-    setFore(fore);
+    // setForecast(fore["detailedForecast"]);
+    // setshortForecast(fore["shortForecast"]);
+    // settemperature(fore["temperature"]);
+    // settemperatureUnit(fore["temperatureUnit"]);
+    // setwindDirection(fore["windDirection"]);
+    // setwindSpeed(fore["windSpeed"]);
+    // seticon(fore["icon"]);
+    // setFore(fore);
     setPeriods(period);
     setHidden(false);
-    }
+    // }
     
-    console.log(fores);   
+    // console.log(fores);   
   }
 
   return (
@@ -112,14 +112,19 @@ export default function AutoPlaces() {
       {/* <h1>detailed forecast: {detailedForecast}</h1> */}
       {!hidden ? 
       <div>
-      <Forecast detailedForecast={detailedForecast} shortForecast={shortForecast} temperature={temperature} temperatureUnit={temperatureUnit} windDirection={windDirection} windSpeed={windSpeed} icon={icon} />
-      <p></p> 
+      {/* <Forecast detailedForecast={detailedForecast} shortForecast={shortForecast} temperature={temperature} temperatureUnit={temperatureUnit} windDirection={windDirection} windSpeed={windSpeed} icon={icon} /> */}
+      {/* <p></p>  */}
       <h1>Weekly Forecast</h1> 
       <Forecast detailedForecast={periods[1]["detailedForecast"]} shortForecast={periods[1]["shortForecast"]} temperature={periods[1]["temperature"]} temperatureUnit={periods[1]["temperatureUnit"]} windDirection={periods[1]["windDirection"]} windSpeed={periods[1]["windSpeed"]} icon={periods[1]["icon"]} />
+      <br/>
       <Forecast detailedForecast={periods[3]["detailedForecast"]} shortForecast={periods[3]["shortForecast"]} temperature={periods[3]["temperature"]} temperatureUnit={periods[3]["temperatureUnit"]} windDirection={periods[3]["windDirection"]} windSpeed={periods[3]["windSpeed"]} icon={periods[3]["icon"]} />
+      <br/>
       <Forecast detailedForecast={periods[5]["detailedForecast"]} shortForecast={periods[5]["shortForecast"]} temperature={periods[5]["temperature"]} temperatureUnit={periods[5]["temperatureUnit"]} windDirection={periods[5]["windDirection"]} windSpeed={periods[5]["windSpeed"]} icon={periods[5]["icon"]} />
+      <br/>
       <Forecast detailedForecast={periods[7]["detailedForecast"]} shortForecast={periods[7]["shortForecast"]} temperature={periods[7]["temperature"]} temperatureUnit={periods[7]["temperatureUnit"]} windDirection={periods[7]["windDirection"]} windSpeed={periods[7]["windSpeed"]} icon={periods[7]["icon"]} />
+      <br/>
       <Forecast detailedForecast={periods[9]["detailedForecast"]} shortForecast={periods[9]["shortForecast"]} temperature={periods[9]["temperature"]} temperatureUnit={periods[9]["temperatureUnit"]} windDirection={periods[9]["windDirection"]} windSpeed={periods[9]["windSpeed"]} icon={periods[9]["icon"]} />
+      <br/>
       <Forecast detailedForecast={periods[11]["detailedForecast"]} shortForecast={periods[11]["shortForecast"]} temperature={periods[11]["temperature"]} temperatureUnit={periods[11]["temperatureUnit"]} windDirection={periods[11]["windDirection"]} windSpeed={periods[11]["windSpeed"]} icon={periods[11]["icon"]} /> 
       </div>
       : null}

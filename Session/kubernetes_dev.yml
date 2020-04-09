@@ -33,6 +33,6 @@ spec:
       containers:
         - name: session-dev
           imagePullPolicy: Always
-          image: teamyoda/sessionmanagement
+          image: teamyoda/sessionmanagement:latest
           ports:
             - containerPort: 3400

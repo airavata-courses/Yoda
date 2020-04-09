@@ -20,6 +20,6 @@
 Upload Image
 
 <a name="GettingStarted"></a>
-### Getting Started
+### Getting Started(Assignment 2)
 
 For getting started with setting up the system and firing up the Weather Dashboard go to [WIKI](https://github.com/airavata-courses/Yoda/wiki/Release-Notes---Assignment-1)

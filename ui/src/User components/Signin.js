@@ -14,11 +14,11 @@ class Signin extends Component {
       redirectToReferer: false,
       loading: false,
       errorMessage: "",
-      loading: false
+      loading: false,
     };
   }
 
-  handleChange = name => event => {
+  handleChange = (name) => (event) => {
     this.setState({ error: "" });
     this.setState({ [name]: event.target.value });
   };
@@ -30,20 +30,20 @@ class Signin extends Component {
     }
   };
 
-  clickSubmit = event => {
+  clickSubmit = (event) => {
     event.preventDefault();
     this.setState({ loading: true });
     const { email, password } = this.state;
     const user = {
       email: email,
-      password: password
+      password: password,
     };
     // console.log(user);
-    this.signin(user).then(data => {
+    this.signin(user).then((data) => {
       console.log(data);
-      if (data && data.data!=null && data.data.error!=null) {
+      if (data && data.data != null && data.data.error != null) {
         this.setState({ error: data.data.error, loading: false });
-      } else if(data && data.token!=null) {
+      } else if (data && data.token != null) {
         this.setState({ errorMessage: "" });
         // authenticate user
         this.authenticate(data, () => {
@@ -56,15 +56,16 @@ class Signin extends Component {
   };
 
   async signin(user) {
-    return await axios.post("/user/signin", user)
-    .then(response => {
-      console.log(response.data);
-      return response.data;
-    })
-    .catch(err => {
-      console.log(err.response);
-      return err.response;
-    })
+    return await axios
+      .post("/user/signin", user)
+      .then((response) => {
+        console.log(response.data);
+        return response.data;
+      })
+      .catch((err) => {
+        console.log(err.response);
+        return err.response;
+      });
     // console.log(axiosRes);
     // return axiosRes.data;
   }
@@ -79,62 +80,62 @@ class Signin extends Component {
     return (
       <div>
         <Menu />
-      <div className="container">
-        <h2 className="mt-5 mb-5">Login!</h2>
+        <div className="container">
+          <h2 className="mt-5 mb-5">Login</h2>
 
-        <div
-          className="alert alert-primary"
-          style={{ display: error ? "" : "none" }}
-        >
-          {error}
-        </div>
-
-        {loading ? (
-          <div className="jumbotron text-center">
-            <h2>Loading ...</h2>
-          </div>
-        ) : (
-          ""
-        )}
-
-        <form>
-          <div className="form-group">
-            <label className="text-muted">Email</label>
-            <input
-              onChange={this.handleChange("email")}
-              type="email"
-              className="form-control"
-              value={email}
-            />
-          </div>
-          <div className="form-group">
-            <label className="text-muted">Password</label>
-            <input
-              onChange={this.handleChange("password")}
-              type="password"
-              className="form-control"
-              value={password}
-            />
-          </div>
-          <button
-            onClick={this.clickSubmit}
-            className="btn btn-raised btn-primary"
+          <div
+            className="alert alert-primary"
+            style={{ display: error ? "" : "none" }}
           >
-            Submit
-          </button>
-          <div className="form-group">
-            <Link className="nav-link text-muted" to="/signup">
-              Don't have an account? Sign Up
-            </Link>
-            <Link
-              to="/forgot-password"
-              className=" nav-link mx-auto text-muted"
-            >
-              Forgot Password? Reset it
-            </Link>
+            {error}
           </div>
-        </form>
-      </div>
+
+          {loading ? (
+            <div className="jumbotron text-center">
+              <h2>Loading ...</h2>
+            </div>
+          ) : (
+            ""
+          )}
+
+          <form>
+            <div className="form-group">
+              <label className="text-muted">Email</label>
+              <input
+                onChange={this.handleChange("email")}
+                type="email"
+                className="form-control"
+                value={email}
+              />
+            </div>
+            <div className="form-group">
+              <label className="text-muted">Password</label>
+              <input
+                onChange={this.handleChange("password")}
+                type="password"
+                className="form-control"
+                value={password}
+              />
+            </div>
+            <button
+              onClick={this.clickSubmit}
+              className="btn btn-raised btn-primary"
+            >
+              Submit
+            </button>
+            <div className="form-group">
+              <Link className="nav-link text-muted" to="/signup">
+                Don't have an account? Sign Up
+              </Link>
+              <Link
+                to="/forgot-password"
+                className=" nav-link mx-auto text-muted"
+              >
+                Forgot Password? Reset it
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }

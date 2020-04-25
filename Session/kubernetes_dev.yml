@@ -13,7 +13,6 @@ spec:
       port: 3400
   #    targetPort: 3400
   #    nodePort: 30400
- # type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment

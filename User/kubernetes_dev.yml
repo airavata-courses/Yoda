@@ -7,7 +7,7 @@ spec:
   selector:
     app: user
   ports:
-    -name: http
+    - name: http
     #- protocol: TCP
       port: 3200
     #  targetPort: 3200

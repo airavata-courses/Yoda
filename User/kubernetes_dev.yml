@@ -3,15 +3,16 @@ apiVersion: v1
 metadata:
   name: user
 spec:
-  type: NodePort
+  #type: NodePort
   selector:
     app: user
   ports:
-    - protocol: TCP
+    -name: http
+    #- protocol: TCP
       port: 3200
-      targetPort: 3200
-      nodePort: 30200
-  type: LoadBalancer
+    #  targetPort: 3200
+   #   nodePort: 30200
+  #type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment

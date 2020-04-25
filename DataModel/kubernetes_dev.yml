@@ -3,15 +3,16 @@ apiVersion: v1
 metadata:
   name: data-model-dev
 spec:
-  type: NodePort
+  # type: NodePort
   selector:
     app: data-model-dev
   ports:
-    - protocol: TCP
+    - name: http
+    # - protocol: TCP
       port: 3900
-      targetPort: 3900
-      nodePort: 30600
-  type: LoadBalancer
+  #     targetPort: 3900
+  #     nodePort: 30600
+  # type: LoadBalancer
 ---
 apiVersion: apps/v1
 kind: Deployment

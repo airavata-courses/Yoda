@@ -7,7 +7,7 @@ spec:
   selector:
     app: realtime-dev
   ports:
-    -name: http
+    - name: http
     # protocol: TCP
       port: 3500
     #  targetPort: 3500

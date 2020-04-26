@@ -33,12 +33,12 @@ spec:
   ports:
   - name: client
     port: 2181
-    protocol: tcp
+    protocol: TCP
   - name: follower
     port: 2888
-    protocol: tcp
+    protocol: TCP
   - name: leader
     port: 3888
-    protocol: tcp
+    protocol: TCP
   selector:
     app: zookeeper-1

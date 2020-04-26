@@ -8,9 +8,9 @@ spec:
     app: data-model-dev
   ports:
     - name: http
-    #- protocol: TCP
+      protocol: TCP
       port: 3900
-     # targetPort: 3900
+      targetPort: 3900
     #  nodePort: 30600
   # type: LoadBalancer
 ---

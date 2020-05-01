@@ -21,7 +21,13 @@ metadata:
   labels:
     app: data-model-dev
 spec:
-  replicas: 2
+  minReadySeconds: 5
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 60
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
   selector:
     matchLabels:
       app: data-model-dev
@@ -33,6 +39,15 @@ spec:
       containers:
         - name: data-model-dev
           imagePullPolicy: Always
-          image: teamyoda/datamodel
+          image: teamyoda/datamodel:7522893ca63f3fed97277ba76e2425da628f9da4
           ports:
-            - containerPort: 3900
+          - name: http
+          containerPort: 3900
+          protocol: TCP
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi

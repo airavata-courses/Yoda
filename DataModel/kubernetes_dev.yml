@@ -42,8 +42,8 @@ spec:
           image: teamyoda/datamodel
           ports:
           - name: http
-          containerPort: 3900
-          protocol: TCP
+            containerPort: 3900
+            protocol: TCP
           resources:
             limits:
               cpu: 2000m

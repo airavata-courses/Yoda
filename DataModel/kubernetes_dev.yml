@@ -39,7 +39,7 @@ spec:
       containers:
         - name: data-model-dev
           imagePullPolicy: Always
-          image: teamyoda/datamodel:7522893ca63f3fed97277ba76e2425da628f9da4
+          image: teamyoda/datamodel
           ports:
           - name: http
           containerPort: 3900

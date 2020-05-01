@@ -21,18 +21,36 @@ metadata:
   labels:
     app: session-dev
 spec:
-  replicas: 2
+  minReadySeconds: 5
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 60
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
   selector:
     matchLabels:
       app: session-dev
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9797"
       labels:
         app: session-dev
     spec:
       containers:
-        - name: session-dev
-          imagePullPolicy: Always
-          image: teamyoda/sessionmanagement
-          ports:
-            - containerPort: 3400
+      - name: session-dev
+        image: teamyoda/sessionmanagement
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 3400
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi

@@ -37,17 +37,17 @@ spec:
         app: data-model-dev
     spec:
       containers:
-        - name: data-model-dev
-          imagePullPolicy: Always
-          image: teamyoda/datamodel
-          ports:
-          - name: http
-            containerPort: 3900
-            protocol: TCP
-          resources:
-            limits:
-              cpu: 2000m
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 64Mi
+      - name: data-model-dev
+        imagePullPolicy: Always
+        image: teamyoda/datamodel
+        ports:
+        - name: http
+          containerPort: 3900
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi

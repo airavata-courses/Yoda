@@ -22,7 +22,13 @@ metadata:
   labels:
     app: data-retrieval-dev
 spec:
-  replicas: 2
+  minReadySeconds: 5
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 60
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+    type: RollingUpdate
   selector:
     matchLabels:
       app: data-retrieval-dev
@@ -36,4 +42,13 @@ spec:
           imagePullPolicy: Always
           image: teamyoda/dataretrieval
           ports:
-            - containerPort: 3300
+          - name: http
+            containerPort: 3300
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi

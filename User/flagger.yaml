@@ -18,9 +18,9 @@ spec:
     name: user
   service:
     # service port number
-    port: 3400
+    port: 3200
     # container port number or name (optional)
-    targetPort: 3400
+    targetPort: 3200
     portDiscovery: true
     # Istio gateways (optional)
     gateways:

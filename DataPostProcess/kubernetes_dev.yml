@@ -45,10 +45,10 @@ spec:
           - name: http
             containerPort: 3800
             protocol: TCP
-          resources:
-            limits:
-              cpu: 2000m
-              memory: 512Mi
-            requests:
-              cpu: 100m
-              memory: 64Mi
+#           resources:
+#             limits:
+#               cpu: 2000m
+#               memory: 512Mi
+#             requests:
+#               cpu: 100m
+#               memory: 64Mi

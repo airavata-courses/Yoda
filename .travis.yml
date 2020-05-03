@@ -12,7 +12,7 @@ after-success:
   - echo $TRAVIS_BUILD_NUMBER
   - docker build -t teamyoda/datapostprocess:$TRAVIS_COMMIT .
   - docker push teamyoda/datapostprocess:$TRAVIS_COMMIT
-  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/dataPostProcessDeployment.sh $TRAVIS_COMMIT"
+  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/dataPostProcessDeploy.sh datapostprocess $TRAVIS_COMMIT"
   - echo "All process done successfully"
 branches:
   only:

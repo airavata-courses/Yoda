@@ -1,15 +1,3 @@
----
-kind: Service
-apiVersion: v1
-metadata:
-  name: session-dev
-spec:
-  selector:
-    app: session-dev
-  ports:
-    -name: http
-      port: 3400
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:

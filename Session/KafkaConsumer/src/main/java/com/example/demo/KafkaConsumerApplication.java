@@ -55,9 +55,6 @@ public class KafkaConsumerApplication {
 		return "Added session with data";
 		
 	}
-
-	
-	
 	@GetMapping("/findAllActivities/{userId}")
 	public List<Sessiondata> getUserData(@PathVariable String userId){
 		System.out.println("Requested"+userId);

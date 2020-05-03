@@ -41,6 +41,7 @@ class Signin extends Component {
     // console.log(user);
     this.signin(user).then((data) => {
       console.log(data);
+	  console.log("Hello");
       if (data && data.data != null && data.data.error != null) {
         this.setState({ error: data.data.error, loading: false });
       } else if (data && data.token != null) {

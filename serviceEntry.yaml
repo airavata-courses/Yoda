@@ -1,14 +1,14 @@
 apiVersion: networking.istio.io/v1alpha3
-    kind: ServiceEntry
-    metadata:
-    name: svc-entry
-    spec:
-    hosts:
-    - noaa-nexrad-level2.s3.amazonaws.com
-    - api.imgur.com
-    ports:
-    - number: 443
-        name: https
-        protocol: HTTPS
-    location: MESH_EXTERNAL
-    resolution: DNS
+kind: ServiceEntry
+metadata:
+ name: svc-entry
+spec:
+ hosts:
+ - noaa-nexrad-level2.s3.amazonaws.com
+ - api.imgur.com
+ ports:
+ - number: 443
+   name: https
+   protocol: HTTPS
+ location: MESH_EXTERNAL
+ resolution: DNS

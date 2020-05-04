@@ -120,7 +120,7 @@ public class KafkaConsumerApplication {
 	@KafkaListener(groupId = "kafkagroupidUpdate", topics = "data-session",containerFactory ="jsonUpdateKafkaListenerContainerFactory" )
 	public UpdateStatus getJSONMsgFromTopic(UpdateStatus data){
 		Date date=new Date();
-		Sessiondata dataToAdd=new Sessiondata(data.getSessionId(),data.getUserId(),"Completed",date.toString());
+		Sessiondata dataToAdd=new Sessiondata(data.getSessionId(),data.getUserId(),"Completed...",date.toString());
 		System.out.println("Consumed kafka"+data.getSessionId());
 		//repository.deleteById(data.getSessionId());
 		repository.delete(dataToAdd);

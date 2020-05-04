@@ -3,7 +3,7 @@ kind: DestinationRule
 metadata:
   name: frontend-dev
 spec:
-  host: frontend-dev
+  host: "*"
   subsets:
   - name: v1
     labels:

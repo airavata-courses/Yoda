@@ -13,7 +13,7 @@ install:
 script:
   - echo "Hi from UserInterface"
 after-success:
-  - cd GatewayServer
+  - cd ui
   - docker login -u $username -p $password
   - docker build -t teamyoda/userinterface:$TRAVIS_COMMIT .
   - docker push teamyoda/userinterface:$TRAVIS_COMMIT

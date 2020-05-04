@@ -1,12 +1,15 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: frontend-dev
+  name: frontend-dev-v1
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: frontend-dev
+    selector:
+    matchLabels:
+      app: frontend-dev
+      version: v1
   minReplicas: 2
   maxReplicas: 4
   metrics:

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { isAuthenticated } from "../auth/index";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import yoda from "./babyyoda.jpg";
 
 class Menu extends Component {
   constructor() {
@@ -26,6 +27,12 @@ class Menu extends Component {
     // }
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <nav class="navbar navbar-light bg-light">
+          <a class="navbar-brand">
+              <img src={yoda} width="30" height="30" class="d-inline-block align-top" alt=""></img>
+              Team Yoda v1
+          </a>
+        </nav>
         <ul className="nav nav-pills">
           <li className="nav-item">
             <a className="nav-link" >

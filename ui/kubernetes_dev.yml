@@ -3,7 +3,8 @@ kind: Deployment
 metadata:
   name: frontend-dev-2
   labels:
-    app: frontend-dev-2
+    app: frontend-dev
+    version: v2
 spec:
   minReadySeconds: 5
   revisionHistoryLimit: 5
@@ -14,14 +15,16 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: frontend-dev-2
+      app: frontend-dev
+      version: v2
   template:
     metadata:
       labels:
-        app: frontend-dev-2
+        app: frontend-dev
+        version: v2
     spec:
       containers:
-      - name: frontend-dev-2
+      - name: frontend-dev
         image: teamyoda/userinterface-v2
         imagePullPolicy: Always
         ports:

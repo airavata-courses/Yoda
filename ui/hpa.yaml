@@ -6,10 +6,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    selector:
-    matchLabels:
-      app: frontend-dev
-      version: v1
+    name: frontend-dev-v1
   minReplicas: 2
   maxReplicas: 4
   metrics:

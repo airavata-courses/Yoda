@@ -13,12 +13,12 @@ install:
 script:
   - echo "Hi from UserInterface"
 after-success:
-  - cd GatewayServer
+  - cd ui
   - docker login -u $username -p $password
-  - docker build -t teamyoda/userinterface:$TRAVIS_COMMIT .
-  - docker push teamyoda/userinterface:$TRAVIS_COMMIT
-  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/frontendDeploy.sh 'userinterface' $TRAVIS_COMMIT"
+  - docker build -t teamyoda/userinterface-v2:$TRAVIS_COMMIT .
+  - docker push teamyoda/userinterface-v2:$TRAVIS_COMMIT
+  - chmod 600 ../deploy_key && ssh -o StrictHostKeyChecking=no -i ../deploy_key ubuntu@149.165.171.52 "~/DeliveryFiles/frontendDeploy.sh 'userinterface-v2' $TRAVIS_COMMIT"
   - echo "All process done successfully"
 branches:
   only:
-    - UserInterface
+    - UI_v2

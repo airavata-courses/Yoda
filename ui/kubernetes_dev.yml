@@ -1,10 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-dev-v1
+  name: frontend-dev
   labels:
     app: frontend-dev
-    version: v1
 spec:
   minReadySeconds: 5
   revisionHistoryLimit: 5
@@ -16,12 +15,10 @@ spec:
   selector:
     matchLabels:
       app: frontend-dev
-      version: v1
   template:
     metadata:
       labels:
         app: frontend-dev
-        version: v1
     spec:
       containers:
       - name: frontend-dev

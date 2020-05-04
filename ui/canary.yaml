@@ -1,16 +1,13 @@
 apiVersion: flagger.app/v1beta1
 kind: Canary
 metadata:
-  name: frontend-dev-v1
+  name: frontend-dev
 spec:
   # deployment reference
   targetRef:
     apiVersion: apps/v1
     kind: Deployment
-    selector:
-    matchLabels:
-      app: frontend-dev
-      version: v1
+    name: frontend-dev
   # the maximum time in seconds for the canary deployment
   # to make progress before it is rollback (default 600s)
   progressDeadlineSeconds: 60
@@ -18,10 +15,7 @@ spec:
   autoscalerRef:
     apiVersion: autoscaling/v2beta1
     kind: HorizontalPodAutoscaler
-    selector:
-    matchLabels:
-      app: frontend-dev
-      version: v1
+    name: frontend-dev
   service:
     # service port number
     port: 3000

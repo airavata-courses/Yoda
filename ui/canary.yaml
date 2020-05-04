@@ -7,7 +7,10 @@ spec:
   targetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: frontend-dev-v1
+    selector:
+    matchLabels:
+      app: frontend-dev
+      version: v1
   # the maximum time in seconds for the canary deployment
   # to make progress before it is rollback (default 600s)
   progressDeadlineSeconds: 60
@@ -15,7 +18,10 @@ spec:
   autoscalerRef:
     apiVersion: autoscaling/v2beta1
     kind: HorizontalPodAutoscaler
-    name: frontend-dev-v1
+    selector:
+    matchLabels:
+      app: frontend-dev
+      version: v1
   service:
     # service port number
     port: 3000
